@@ -1086,8 +1086,8 @@
 </head>
 <body class="bg-[var(--bg)] dark:bg-[var(--bg-dark)] transition-colors duration-500">
 
-    <div id="chat-bg" class="fixed inset-0 w-full h-full bg-center bg-cover z-0 transition-all duration-700"
-    style="background-image: url('https://picsum.photos/1080/1920?random=1');"></div>
+   <div id="chat-bg" class="fixed inset-0 w-full h-full z-0 transition-all duration-700"
+    style="background-color: #ffffff;"></div>
     <div class="fixed inset-0 bg-white/30 dark:bg-black/30 z-[5] transition-all duration-500">
     </div>
 
@@ -1319,7 +1319,7 @@
 
     <!-- 设置面板 -->
     <div id="set-panel-overlay" class="set-panel-overlay fixed inset-0 z-50 bg-black/55 hidden backdrop-blur-sm">
-        <div id="set-panel-card" class="set-panel-card w-full max-w-md rounded-3xl max-h-[65vh] overflow-y-auto p-0 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] shadow-2xl no-scrollbar border border-[var(--border)] dark:border-[var(--border-dark)]" style="top:50%;left:50%;transform:translate(-50%,-50%);">
+        <div id="set-panel-card" class="set-panel-card w-full max-w-md rounded-3xl max-h-[78vh] overflow-y-auto p-0 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] shadow-2xl no-scrollbar border border-[var(--border)] dark:border-[var(--border-dark)]" style="top:50%;left:50%;transform:translate(-50%,-50%);">
             <div id="set-panel-drag-handle" class="set-panel-drag-handle sticky top-0 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10 rounded-t-3xl" title="拖拽移动面板"></div>
             <div class="flex justify-between items-center px-5 pb-3 sticky top-8 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10">
                 <h3 class="font-bold text-xl tracking-tight flex items-center gap-2 pointer-events-none">✨ 设置中心</h3>
@@ -1423,7 +1423,7 @@
             const DEFAULT_LO_AVATAR = 'data:image/svg+xml;base64,' + btoa(
                 '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#F472B6"/><stop offset="100%" stop-color="#FFB8D4"/></linearGradient></defs><rect width="200" height="200" rx="28" fill="url(#g)"/><circle cx="100" cy="78" r="33" fill="#fff" opacity="0.95"/><ellipse cx="100" cy="158" rx="52" ry="36" fill="#fff" opacity="0.9"/></svg>'
             );
-            const DEFAULT_BG = 'https://picsum.photos/1080/1920?random=1';
+            const DEFAULT_BG = '#ffffff';
             const S = (k) => JSON.parse(localStorage.getItem('mc_' + k) || 'null');
             const SS = (k, v) => {
                 try {
