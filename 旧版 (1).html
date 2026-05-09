@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>字卡 · 眼里只有你</title>
+    <title>LuvKnot · Seer</title>
     <script src="https://cdn.tailwindcss.com">
     </script>
     <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -33,8 +33,8 @@
             --primary: #5B7FFF;
             --primary-soft: rgba(91, 127, 255, 0.10);
             --primary-glow: rgba(91, 127, 255, 0.22);
-            --success: #34C759;
-            --danger: #FF3B4A;
+            --danger: #F87171;
+            --danger-hover: #EF4444;
             --pink: #F472B6;
             --bg: #f2f3f7;
             --bg-dark: #12141a;
@@ -76,6 +76,10 @@
             --bubble-me: var(--primary);
             --bubble-you: #ffffff;
             --bubble-you-dark: #2a2a38;
+            --btn-secondary: #9ca3af;
+            --btn-secondary-hover: #6b7280;
+            --btn-danger: #F87171;
+            --btn-danger-hover: #EF4444;
         }
         .dark {
             --bg: #12141a;
@@ -92,6 +96,12 @@
             --bubble-you-dark: #2a2a38;
             --primary-soft: rgba(91, 127, 255, 0.15);
             --primary-glow: rgba(91, 127, 255, 0.28);
+            --danger: #F87171;
+            --danger-hover: #FCA5A5;
+            --btn-secondary: #6b7280;
+            --btn-secondary-hover: #9ca3af;
+            --btn-danger: #F87171;
+            --btn-danger-hover: #FCA5A5;
         }
         * {
             -webkit-tap-highlight-color: transparent;
@@ -426,10 +436,38 @@
             align-items: center;
             gap: 5px;
             white-space: nowrap;
+            letter-spacing: 0.01em;
         }
         .btn-mini:active {
             transform: scale(0.93);
             opacity: 0.85;
+        }
+        .btn-mini-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 2px 8px var(--primary-glow);
+        }
+        .btn-mini-primary:hover {
+            opacity: 0.88;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+        .btn-mini-danger {
+            background: var(--btn-danger);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(248, 113, 113, 0.25);
+        }
+        .btn-mini-danger:hover {
+            background: var(--btn-danger-hover);
+            box-shadow: 0 4px 14px rgba(248, 113, 113, 0.35);
+        }
+        .btn-mini-secondary {
+            background: var(--btn-secondary);
+            color: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+        }
+        .btn-mini-secondary:hover {
+            background: var(--btn-secondary-hover);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
         }
         .chip-tag {
             display: inline-flex;
@@ -473,7 +511,7 @@
             animation: slideUpAudio 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--border);
             background: var(--surface);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            border-radius: var(--radius-lg);  /* ✅ 四角都圆润 */
         }
         .dark .audio-float-bar {
             background: var(--surface-dark);
@@ -855,6 +893,167 @@
         .letter-modal-backdrop {
             animation: fadeIn 0.22s ease;
         }
+        .letter-view-backdrop {
+            animation: fadeIn 0.2s ease;
+        }
+        .letter-view-card {
+            animation: scaleIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .btn-mode {
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 500;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--text-secondary);
+            border: 1px solid transparent;
+        }
+        .dark .btn-mode {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-secondary-dark);
+        }
+        .btn-mode:hover {
+            background: rgba(0, 0, 0, 0.07);
+            color: var(--text-primary);
+        }
+        .dark .btn-mode:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary-dark);
+        }
+        .btn-mode.active {
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+            box-shadow: 0 2px 10px var(--primary-glow);
+            border-color: transparent;
+        }
+        .btn-reset-bg {
+            font-size: var(--font-caption);
+            padding: 7px 14px;
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.05);
+            color: var(--text-secondary);
+            border: none;
+            box-shadow: none;
+        }
+        .dark .btn-reset-bg {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text-secondary-dark);
+        }
+        .btn-reset-bg:hover {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-primary);
+        }
+        .dark .btn-reset-bg:hover {
+            background: rgba(255, 255, 255, 0.14);
+            color: var(--text-primary-dark);
+        }
+
+        /* ========== 信件相关样式 ========== */
+        .letter-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            transition: all var(--transition-base);
+            cursor: default;
+        }
+        .dark .letter-card {
+            background: var(--surface-elevated-dark);
+            border: 1px solid var(--border-dark);
+        }
+        .letter-card:hover {
+            box-shadow: var(--shadow-elevated);
+            border-color: var(--primary);
+        }
+        .letter-card .letter-status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+        .letter-card .letter-status-dot.waiting {
+            background: #f59e0b;
+            animation: letterPulse 1.6s ease-in-out infinite;
+        }
+        .letter-card .letter-status-dot.arrived {
+            background: #10b981;
+            box-shadow: 0 0 6px rgba(16, 185, 129, 0.4);
+        }
+        @keyframes letterPulse {
+            0%,
+            100% {
+                opacity: 1;
+                box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5);
+            }
+            50% {
+                opacity: 0.6;
+                box-shadow: 0 0 0 8px rgba(245, 158, 11, 0);
+            }
+        }
+        .letter-reply-paragraph {
+            line-height: 1.9;
+            font-size: 15px;
+            letter-spacing: 0.02em;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, rgba(91, 127, 255, 0.04), rgba(244, 114, 182, 0.04));
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            border-left: 3px solid var(--primary);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .dark .letter-reply-paragraph {
+            color: var(--text-primary-dark);
+            background: linear-gradient(135deg, rgba(91, 127, 255, 0.08), rgba(244, 114, 182, 0.06));
+            border-left: 3px solid var(--primary);
+        }
+        .letter-my-content-block {
+            line-height: 1.8;
+            font-size: 14px;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .dark .letter-my-content-block {
+            color: var(--text-primary-dark);
+        }
+        .letter-envelope-icon {
+            font-size: 40px;
+            display: block;
+            text-align: center;
+            margin-bottom: 4px;
+        }
+        .letter-section-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
     </style>
     <script>
         (function() {
@@ -889,7 +1088,7 @@
 
     <div id="chat-bg" class="fixed inset-0 w-full h-full bg-center bg-cover z-0 transition-all duration-700"
     style="background-image: url('https://picsum.photos/1080/1920?random=1');"></div>
-    <div class="fixed inset-0 bg-white/55 via-white/40 to-white/65 dark:bg-black/55 dark:via-black/45 dark:to-black/65 z-[5] transition-all duration-500">
+    <div class="fixed inset-0 bg-white/30 dark:bg-black/30 z-[5] transition-all duration-500">
     </div>
 
     <div class="relative z-20 flex flex-col max-w-lg mx-auto" style="height: 100vh; height: 100dvh;">
@@ -897,14 +1096,20 @@
             <span id="time-text" class="font-semibold tracking-tight text-[13px] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]">12:00</span>
             <span id="count-text" class="text-[11px] opacity-70 font-medium bg-black/[0.04] dark:bg-white/8 px-2.5 py-1 rounded-full text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">今日传讯：0次</span>
             <div class="flex items-center gap-0.5">
-                <button id="call-btn" class="top-bar-btn" title="语音/视频通话">
-                    <i class="fa-solid fa-phone text-sm"></i>
+                <!-- 新增导入导出按钮 -->
+                <button id="export-top-btn" class="top-bar-btn" title="导出全部对话">
+                    <i class="fa-solid fa-file-export text-sm"></i>
                 </button>
+                <button id="import-top-btn" class="top-bar-btn" title="导入全部对话">
+                    <i class="fa-solid fa-file-import text-sm"></i>
+                </button>
+                <!-- 原有按钮 -->
                 <button id="letter-btn" class="top-bar-btn" title="信件投递">
                     <i class="fa-solid fa-envelope text-sm"></i>
                 </button>
-                <button id="moments-btn" class="top-bar-btn" title="朋友圈">
+                <button id="moments-btn" class="top-bar-btn relative" title="朋友圈">
                     <i class="fa-solid fa-circle-dot text-sm"></i>
+                    <span id="moments-dot" class="absolute -top-1 -right-1 bg-red-500 text-white text-[9px] rounded-full w-4 h-4 flex items-center justify-center hidden">0</span>
                 </button>
                 <button id="music-top-btn" class="top-bar-btn hidden" title="音乐播放器">
                     <i class="fa-solid fa-music text-sm"></i>
@@ -951,6 +1156,15 @@
         </div>
 
         <div class="input-area flex-shrink-0 flex items-center gap-2.5 px-3" style="height: calc(4rem + env(safe-area-inset-bottom, 0px)); padding-bottom: env(safe-area-inset-bottom, 0px);">
+            <!-- 新增通话按钮，放在图片按钮左边，样式与图片按钮一致 -->
+            <button id="call-btn"
+                    class="w-8 h-8 flex items-center justify-center rounded-full
+                           bg-black/[0.04] dark:bg-white/6
+                           hover:bg-black/[0.08] dark:hover:bg-white/10
+                           transition-all duration-200 flex-shrink-0 active:scale-90"
+                    title="语音/视频通话">
+                <i class="fa-solid fa-phone text-sm text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]"></i>
+            </button>
             <button id="img-emoji-btn" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/6 hover:bg-black/[0.08] dark:hover:bg-white/10 transition-all duration-200 flex-shrink-0 active:scale-90" title="图片表情">
                 <i class="fa-regular fa-image text-base text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]"></i>
             </button>
@@ -962,7 +1176,7 @@
                         <i class="fa-solid fa-xmark text-[9px]"></i>
                     </button>
                 </div>
-                <button id="active-btn" class="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-all duration-200 flex-shrink-0 active:scale-85 z-10" title="梦角主动发言">
+                <button id="active-btn" class="absolute right-3 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-all duration-200 flex-shrink-0 active:scale-85 z-10" title="Ta主动发言">
                     <i class="fa-solid fa-bolt text-sm"></i>
                 </button>
             </div>
@@ -970,8 +1184,8 @@
                 <i class="fa-solid fa-paper-plane text-sm"></i>
             </button>
         </div>
-    </div>
 
+    <!-- 通话覆盖层 -->
     <div id="call-overlay" class="call-overlay fixed inset-0 hidden flex flex-col items-center justify-center z-[58]">
         <div class="absolute inset-0 overflow-hidden opacity-25">
             <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-[var(--primary)] blur-3xl"></div>
@@ -982,7 +1196,7 @@
             <div id="call-timer-text" class="text-white/60 text-sm mb-6 tracking-wider font-mono hidden">00:00</div>
             <div id="call-avatar-area" class="relative mb-6">
                 <div id="call-avatar-ring" class="call-avatar-ring-pulse rounded-full p-1.5" style="background: rgba(255,255,255,0.1);">
-                    <img id="call-avatar-img" src="" alt="梦角头像" class="w-28 h-28 rounded-full object-cover shadow-2xl" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,'+btoa('<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%23F472B6%22/><stop offset=%22100%25%22 stop-color=%22%23FFB8D4%22/></linearGradient></defs><rect width=%22200%22 height=%22200%22 rx=%2228%22 fill=%22url(#g)%22/><circle cx=%22100%22 cy=%2278%22 r=%2233%22 fill=%22%23fff%22 opacity=%220.95%22/><ellipse cx=%22100%22 cy=%22158%22 rx=%2252%22 ry=%2236%22 fill=%22%23fff%22 opacity=%220.9%22/></svg>')">
+                    <img id="call-avatar-img" src="" alt="Ta的头像" class="w-28 h-28 rounded-full object-cover shadow-2xl" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,'+btoa('<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%23F472B6%22/><stop offset=%22100%25%22 stop-color=%22%23FFB8D4%22/></linearGradient></defs><rect width=%22200%22 height=%22200%22 rx=%2228%22 fill=%22url(#g)%22/><circle cx=%22100%22 cy=%2278%22 r=%2233%22 fill=%22%23fff%22 opacity=%220.95%22/><ellipse cx=%22100%22 cy=%22158%22 rx=%2252%22 ry=%2236%22 fill=%22%23fff%22 opacity=%220.9%22/></svg>')">
                 </div>
             </div>
             <div id="call-video-area" class="hidden relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden mb-6 call-video-bg-anim" style="background: #0a0a14;">
@@ -992,7 +1206,7 @@
                     <img id="call-self-cam-img" src="" alt="我" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,'+btoa('<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%235B7FFF%22/><stop offset=%22100%25%22 stop-color=%22%238B9FFF%22/></linearGradient></defs><rect width=%22200%22 height=%22200%22 rx=%2228%22 fill=%22url(#g)%22/><circle cx=%22100%22 cy=%2275%22 r=%2235%22 fill=%22%23fff%22 opacity=%220.95%22/><ellipse cx=%22100%22 cy=%22160%22 rx=%2255%22 ry=%2238%22 fill=%22%23fff%22 opacity=%220.9%22/></svg>')">
                 </div>
             </div>
-            <div id="call-name-text" class="text-white text-xl font-bold mb-1 tracking-wide">梦角</div>
+            <div id="call-name-text" class="text-white text-xl font-bold mb-1 tracking-wide">Ta</div>
             <div id="call-wave-bars" class="flex items-center justify-center gap-0.5 my-3 h-8 hidden">
                 <span class="call-wave-bar"></span><span class="call-wave-bar"></span><span class="call-wave-bar"></span>
                 <span class="call-wave-bar"></span><span class="call-wave-bar"></span><span class="call-wave-bar"></span>
@@ -1029,7 +1243,7 @@
     <div id="call-mini-window" class="call-mini-window fixed hidden px-3 py-2.5 flex items-center gap-3 select-none" style="top:60px;right:12px;z-index:52;">
         <img id="call-mini-avatar" src="" alt="" class="w-9 h-9 rounded-full object-cover flex-shrink-0" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,'+btoa('<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22 viewBox=%220 0 200 200%22><defs><linearGradient id=%22g%22 x1=%220%25%22 y1=%220%25%22 x2=%22100%25%22 y2=%22100%25%22><stop offset=%220%25%22 stop-color=%22%23F472B6%22/><stop offset=%22100%25%22 stop-color=%22%23FFB8D4%22/></linearGradient></defs><rect width=%22200%22 height=%22200%22 rx=%2228%22 fill=%22url(#g)%22/><circle cx=%22100%22 cy=%2278%22 r=%2233%22 fill=%22%23fff%22 opacity=%220.95%22/><ellipse cx=%22100%22 cy=%22158%22 rx=%2252%22 ry=%2236%22 fill=%22%23fff%22 opacity=%220.9%22/></svg>')">
         <div class="flex-1 min-w-0">
-            <div class="text-xs font-semibold text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] truncate" id="call-mini-name">梦角</div>
+            <div class="text-xs font-semibold text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] truncate" id="call-mini-name">Ta</div>
             <div class="text-[10px] text-emerald-500 font-medium" id="call-mini-timer">00:00</div>
         </div>
         <button id="call-mini-hangup" class="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--danger)] hover:bg-red-600 text-white flex-shrink-0 transition-all active:scale-90 shadow-md" title="挂断">
@@ -1053,22 +1267,59 @@
         <img id="preview-img" src="" alt="预览" class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl" onclick="event.stopPropagation()">
     </div>
 
-    <div id="letter-modal" class="letter-modal-backdrop fixed inset-0 z-[60] bg-black/70 hidden flex items-end justify-center">
-        <div class="bg-[var(--surface)] dark:bg-[var(--surface-dark)] w-full max-w-lg rounded-t-3xl p-5 shadow-2xl animate-slideUp max-h-[85vh] overflow-y-auto no-scrollbar">
-            <div class="flex justify-between items-center mb-3 sticky top-0 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10 pb-2">
-                <span class="font-bold text-lg text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] flex items-center gap-2"><i class="fa-solid fa-envelope text-[var(--primary)]"></i> 信件投递</span>
+    <!-- 信件投递弹窗 -->
+    <div id="letter-modal" class="letter-modal-backdrop fixed inset-0 z-[60] bg-black/70 hidden flex items-center justify-center">
+        <div class="bg-[var(--surface)] dark:bg-[var(--surface-dark)] w-full max-w-lg rounded-3xl p-5 shadow-2xl max-h-[85vh] overflow-y-auto no-scrollbar mx-4">
+            <div class="flex justify-between items-center mb-4 sticky top-0 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10 pb-3 border-b border-[var(--border)] dark:border-[var(--border-dark)]">
+                <span class="font-bold text-lg text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] flex items-center gap-2">
+                    <span class="letter-envelope-icon">✉️</span> 写信给Ta
+                </span>
                 <button id="close-letter-modal" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/8 hover:bg-black/[0.08] dark:hover:bg-white/12 transition-colors text-sm">✕</button>
             </div>
-            <p class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mb-2">写下你想说的话（8-15句话），梦角会在8-12小时内回信</p>
-            <textarea id="letter-text" rows="6" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] resize-none text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] placeholder:text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="亲爱的梦角...&#10;今天我想和你说..."></textarea>
-            <button id="send-letter" class="mt-3 w-full py-3 bg-[var(--primary)] text-white rounded-2xl font-semibold shadow-lg active:scale-95 transition-transform">📮 投递信件（8-12小时回信）</button>
-            <div id="letter-list" class="mt-4 max-h-48 overflow-y-auto text-xs space-y-2 no-scrollbar"></div>
-            <div id="letter-empty" class="text-xs text-[var(--text-secondary)] text-center py-4 hidden">暂无投递的信件</div>
+            <p class="text-[11px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mb-3 leading-relaxed bg-[var(--primary)]/[0.04] dark:bg-[var(--primary)]/[0.06] rounded-xl px-3 py-2.5">
+                💡 写下你想对Ta说的话，Ta会在 <strong>8-12小时内</strong> 用心回信，字卡之间自然衔接成一段暖心的话。
+            </p>
+            <textarea id="letter-text" rows="9" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-2xl p-4 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] resize-none text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] placeholder:text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--primary)]/25 transition-all leading-relaxed" placeholder="亲爱的…&#10;&#10;今天我想和你说…&#10;&#10;最近发生了一件有趣的事…&#10;&#10;……"></textarea>
+            <button id="send-letter" class="mt-3 w-full py-3.5 bg-[var(--primary)] text-white rounded-2xl font-semibold shadow-lg active:scale-95 transition-transform text-sm tracking-wide">
+                📮 投递信件 · 期待回信
+            </button>
+            <div class="mt-5 pt-3 border-t border-[var(--border)] dark:border-[var(--border-dark)]">
+                <span class="text-[11px] font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider mb-3 block">📬 已投递的信件</span>
+                <div id="letter-list" class="max-h-56 overflow-y-auto text-xs space-y-2.5 no-scrollbar"></div>
+                <div id="letter-empty" class="text-xs text-[var(--text-secondary)] text-center py-5 hidden">暂无投递的信件，写第一封信吧~</div>
+            </div>
         </div>
     </div>
 
+    <!-- 回信查看弹窗 -->
+    <div id="letter-view-modal" class="letter-view-backdrop fixed inset-0 z-[60] bg-black/70 hidden flex items-center justify-center">
+        <div class="bg-[var(--surface)] dark:bg-[var(--surface-dark)] w-full max-w-sm rounded-3xl p-6 shadow-2xl max-h-[82vh] overflow-y-auto no-scrollbar mx-4 letter-view-card">
+            <div class="flex justify-between items-center mb-5 sticky top-0 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10 pb-3 border-b border-[var(--border)] dark:border-[var(--border-dark)]">
+                <span class="font-bold text-lg text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] flex items-center gap-2">
+                    💌 Ta的回信
+                </span>
+                <button id="close-letter-view" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/8 hover:bg-black/[0.08] dark:hover:bg-white/12 transition-colors text-sm">✕</button>
+            </div>
+            <div class="mb-5">
+                <div class="letter-section-label text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">
+                    <i class="fa-solid fa-feather-pointed text-[var(--primary)]"></i> 你的信
+                </div>
+                <div id="letter-view-my-content" class="bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] rounded-2xl p-4 text-sm letter-my-content-block shadow-sm border border-[var(--border)] dark:border-[var(--border-dark)]">
+                </div>
+            </div>
+            <div>
+                <div class="letter-section-label text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">
+                    <i class="fa-solid fa-heart text-[var(--pink)]"></i> Ta说
+                </div>
+                <div id="letter-view-lover-reply" class="letter-reply-paragraph">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 设置面板 -->
     <div id="set-panel-overlay" class="set-panel-overlay fixed inset-0 z-50 bg-black/55 hidden backdrop-blur-sm">
-        <div id="set-panel-card" class="set-panel-card w-full max-w-md rounded-t-3xl max-h-[90vh] overflow-y-auto p-0 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] shadow-2xl no-scrollbar border border-[var(--border)] dark:border-[var(--border-dark)]" style="top:50%;left:50%;transform:translate(-50%,-50%);">
+        <div id="set-panel-card" class="set-panel-card w-full max-w-md rounded-3xl max-h-[65vh] overflow-y-auto p-0 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] shadow-2xl no-scrollbar border border-[var(--border)] dark:border-[var(--border-dark)]" style="top:50%;left:50%;transform:translate(-50%,-50%);">
             <div id="set-panel-drag-handle" class="set-panel-drag-handle sticky top-0 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10 rounded-t-3xl" title="拖拽移动面板"></div>
             <div class="flex justify-between items-center px-5 pb-3 sticky top-8 bg-[var(--surface)] dark:bg-[var(--surface-dark)] z-10">
                 <h3 class="font-bold text-xl tracking-tight flex items-center gap-2 pointer-events-none">✨ 设置中心</h3>
@@ -1078,63 +1329,64 @@
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-palette"></i> 外观美化<span class="fold-icon">▸</span></div>
                     <div class="settings-card-body hidden">
-                        <div class="flex items-center justify-between mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">显示模式</span><div class="flex gap-1.5"><button id="light" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">☀️ 日间</button><button id="dark" class="px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600">🌙 夜间</button></div></div>
+                        <div class="flex items-center justify-between mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">显示模式</span><div class="flex gap-1.5"><button id="light" class="btn-mode active">☀️ 日间</button><button id="dark" class="btn-mode">🌙 夜间</button></div></div>
                         <div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-2">主题颜色</span><div class="flex flex-wrap gap-2.5"><button data-c="c1" class="color-dot" style="background-color:#5B7FFF;"></button><button data-c="c2" class="color-dot" style="background-color:#4ECB71;"></button><button data-c="c3" class="color-dot" style="background-color:#FF8C42;"></button><button data-c="c4" class="color-dot" style="background-color:#F0626E;"></button><button data-c="c5" class="color-dot" style="background-color:#8B5CF6;"></button><button data-c="c6" class="color-dot" style="background-color:#F472B6;"></button><button data-c="c7" class="color-dot" style="background-color:#2DD4BF;"></button></div></div>
                         <div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-2">气泡字体大小：<span id="font-size-label">14px</span></span><input type="range" id="font-size-slider" min="12" max="20" value="14" step="1" class="range-slider"></div>
                     </div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-user-circle"></i> 个人资料<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="grid grid-cols-2 gap-3"><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">我的头像</p><input type="file" id="my-avt" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><div id="my-avt-preview" class="mt-2 w-10 h-10 rounded-2xl bg-cover bg-center avatar-ring"></div></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">梦角头像</p><input type="file" id="lo-avt" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><div id="lo-avt-preview" class="mt-2 w-10 h-10 rounded-2xl bg-cover bg-center avatar-ring"></div></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">我的昵称</p><input id="my-name" class="w-full h-9 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl px-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="我"></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">梦角名称</p><input id="lo-name" class="w-full h-9 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl px-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="梦角"></div></div></div>
+                    <div class="settings-card-body hidden"><div class="grid grid-cols-2 gap-3"><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">我的头像</p><input type="file" id="my-avt" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><div id="my-avt-preview" class="mt-2 w-10 h-10 rounded-2xl bg-cover bg-center avatar-ring"></div></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">Ta的头像</p><input type="file" id="lo-avt" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><div id="lo-avt-preview" class="mt-2 w-10 h-10 rounded-2xl bg-cover bg-center avatar-ring"></div></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">我的昵称</p><input id="my-name" class="w-full h-9 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl px-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="我"></div><div><p class="text-[10px] mb-1.5 font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] uppercase tracking-wider">Ta的昵称</p><input id="lo-name" class="w-full h-9 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl px-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="Ta"></div></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-image"></i> 聊天背景<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><input type="file" id="bg-file" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><button id="reset-bg-white" class="btn-mini bg-gray-200 text-gray-700 hover:bg-gray-300 shadow-sm mt-2">⬜ 恢复白色背景</button></div>
+                    <div class="settings-card-body hidden"><input type="file" id="bg-file" accept="image/*" class="text-[10px] w-full file:mr-1 file:py-1 file:px-3 file:rounded-full file:border-0 file:text-[10px] file:font-medium file:bg-gray-100 dark:file:bg-gray-700 file:text-gray-700 dark:file:text-gray-200 hover:file:bg-gray-200 dark:hover:file:bg-gray-600 file:transition-colors file:cursor-pointer"><button id="reset-bg-white" class="btn-reset-bg mt-2">⬜ 恢复白色背景</button></div>
                 </div>
                 <div class="settings-card">
-                    <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-sliders"></i> 梦角行为<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复速度：<span id="reply-speed-label">4秒</span></span><input type="range" id="reply-speed-slider" min="3" max="120" value="4" step="1" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>3秒（频繁）</span><span>2分钟（缓慢）</span></div></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复条数：<span id="reply-count-label">1条</span></span><input type="range" id="reply-count-slider" min="1" max="5" value="1" step="1" class="range-slider max-w-full"></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">梦角主动发消息</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="active-msg-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">引用回复</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="quote-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">已读不回</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="read-ignore-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">组合回复 <span class="text-[10px] text-[var(--text-secondary)]">（多条合并为一条）</span></span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="combine-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div></div>
+                    <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-sliders"></i> 交互行为<span class="fold-icon">▸</span></div>
+                    <div class="settings-card-body hidden"><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复速度：<span id="reply-speed-label">4秒</span></span><input type="range" id="reply-speed-slider" min="3" max="180" value="4" step="1" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>3秒（频繁）</span><span>3分钟（缓慢）</span></div></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复条数：<span id="reply-count-label">1条</span></span><input type="range" id="reply-count-slider" min="1" max="5" value="1" step="1" class="range-slider max-w-full"></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">Ta主动发消息</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="active-msg-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">引用回复</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="quote-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">已读不回</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="read-ignore-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">组合回复 <span class="text-[10px] text-[var(--text-secondary)]">（多条合并为一条）</span></span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="combine-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-circle-dot"></i> 朋友圈<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">梦角自动发朋友圈</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="moment-enabled-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">每日发送条数：<span id="moment-count-label">1条</span></span><input type="range" id="moment-count-slider" min="0" max="5" value="1" step="1" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>0条（关闭）</span><span>5条（频繁）</span></div></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">发送时段</span><div class="flex gap-2 items-center text-xs"><input type="number" id="moment-start-hour" min="0" max="23" value="8" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="text-[var(--text-secondary)]">:</span><input type="number" id="moment-start-min" min="0" max="59" value="0" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="mx-1 text-[var(--text-secondary)]">至</span><input type="number" id="moment-end-hour" min="0" max="23" value="23" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="text-[var(--text-secondary)]">:</span><input type="number" id="moment-end-min" min="0" max="59" value="0" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"></div></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">梦角回复我的朋友圈</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="moment-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复延迟上限：<span id="reply-delay-label">60</span>分钟</span><input type="range" id="reply-delay-slider" min="10" max="120" value="60" step="5" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>10分钟</span><span>120分钟</span></div></div></div>
+                    <div class="settings-card-body hidden"><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">Ta自动发朋友圈</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="moment-enabled-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">每日发送条数：<span id="moment-count-label">1条</span></span><input type="range" id="moment-count-slider" min="0" max="5" value="1" step="1" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>0条（关闭）</span><span>5条（频繁）</span></div></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">发送时段</span><div class="flex gap-2 items-center text-xs"><input type="number" id="moment-start-hour" min="0" max="23" value="8" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="text-[var(--text-secondary)]">:</span><input type="number" id="moment-start-min" min="0" max="59" value="0" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="mx-1 text-[var(--text-secondary)]">至</span><input type="number" id="moment-end-hour" min="0" max="23" value="23" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"><span class="text-[var(--text-secondary)]">:</span><input type="number" id="moment-end-min" min="0" max="59" value="0" class="w-14 h-8 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-lg text-center bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]"></div></div><div class="toggle-row"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]">Ta回复我的朋友圈</span><label class="relative inline-flex items-center cursor-pointer"><input type="checkbox" id="moment-reply-toggle" class="sr-only peer"><div class="w-10 h-5 bg-gray-300 dark:bg-gray-600 rounded-full peer-checked:bg-[var(--primary)] transition-colors peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all"></div></label></div><div class="mb-3"><span class="text-xs font-medium text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-1.5">回复延迟上限：<span id="reply-delay-label">60</span>分钟</span><input type="range" id="reply-delay-slider" min="10" max="120" value="60" step="5" class="range-slider"><div class="flex justify-between text-[9px] text-[var(--text-secondary)] mt-0.5"><span>10分钟</span><span>120分钟</span></div></div></div>
                 </div>
                 <div class="settings-card">
-                    <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-note-sticky"></i> 朋友圈独立字卡 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（梦角发圈专用）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><textarea id="moment-words-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="一行一条，仅用于梦角自动发朋友圈"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-moment-words-btn" class="btn-mini bg-blue-500 text-white hover:bg-blue-600 shadow-sm">📤 导出</button><button id="import-moment-words-btn" class="btn-mini bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm">📥 导入</button><input type="file" id="import-moment-words-file" accept=".txt" class="hidden"><button id="clear-moment-words" class="btn-mini bg-red-500 text-white hover:bg-red-600 shadow-sm">🗑 清空</button><span id="moment-words-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
+                    <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-note-sticky"></i> 朋友圈独立字卡 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（Ta发圈专用）</span><span class="fold-icon">▸</span></div>
+                    <div class="settings-card-body hidden"><textarea id="moment-words-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="一行一条，仅用于Ta自动发朋友圈"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-moment-words-btn" class="btn-mini btn-mini-primary">📤 导出</button><button id="import-moment-words-btn" class="btn-mini btn-mini-primary">📥 导入</button><input type="file" id="import-moment-words-file" accept=".txt" class="hidden"><button id="clear-moment-words" class="btn-mini btn-mini-danger">🗑 清空</button><span id="moment-words-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-note-sticky"></i> 字卡库 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（每行一条）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><textarea id="word-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="一行一条，实时保存"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-words-btn" class="btn-mini bg-blue-500 text-white hover:bg-blue-600 shadow-sm">📤 导出字卡</button><button id="import-words-btn" class="btn-mini bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm">📥 导入字卡</button><input type="file" id="import-words-file" accept=".txt,.json" class="hidden"><button id="clear-word" class="btn-mini bg-red-500 text-white hover:bg-red-600 shadow-sm">🗑 清空</button><span id="word-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
+                    <div class="settings-card-body hidden"><textarea id="word-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="一行一条，实时保存"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-words-btn" class="btn-mini btn-mini-primary">📤 导出字卡</button><button id="import-words-btn" class="btn-mini btn-mini-primary">📥 导入字卡</button><input type="file" id="import-words-file" accept=".txt,.json" class="hidden"><button id="clear-word" class="btn-mini btn-mini-danger">🗑 清空</button><span id="word-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-face-smile"></i> 文字表情库 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（每行一条）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><textarea id="emoji-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="(｡･ω･｡)ﾉ♡ 实时保存"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-emojis-btn" class="btn-mini bg-blue-500 text-white hover:bg-blue-600 shadow-sm">📤 导出表情</button><button id="import-emojis-btn" class="btn-mini bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm">📥 导入表情</button><input type="file" id="import-emojis-file" accept=".txt,.json" class="hidden"><button id="clear-emoji" class="btn-mini bg-red-500 text-white hover:bg-red-600 shadow-sm">🗑 清空</button><span id="emoji-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
+                    <div class="settings-card-body hidden"><textarea id="emoji-cards" rows="8" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all resize-none" placeholder="(｡･ω･｡)ﾉ♡ 实时保存"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="export-emojis-btn" class="btn-mini btn-mini-primary">📤 导出表情</button><button id="import-emojis-btn" class="btn-mini btn-mini-primary">📥 导入表情</button><input type="file" id="import-emojis-file" accept=".txt,.json" class="hidden"><button id="clear-emoji" class="btn-mini btn-mini-danger">🗑 清空</button><span id="emoji-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] ml-auto">共 0 条</span></div></div>
                 </div>
                 <div class="settings-card bg-[var(--primary)]/[0.02] dark:bg-[var(--primary)]/[0.03]">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-wand-magic-sparkles"></i> 智能导入 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">自动识别文字/表情并分流（支持粘贴或文件）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><textarea id="smart-import-text" rows="8" class="w-full border border-[var(--primary)]/30 dark:border-[var(--primary)]/20 rounded-xl p-3 text-sm bg-white/60 dark:bg-gray-800/50 focus:ring-2 focus:ring-[var(--primary)]/25 transition-all resize-none" placeholder="粘贴混合内容（文字+颜文字），自动识别分类…&#10;例如：&#10;今天很开心&#10;(๑•̀ㅂ•́)و✧&#10;晚安好梦&#10;qwq"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="smart-import-btn" class="btn-mini bg-[var(--primary)] text-white hover:opacity-85 shadow-md font-semibold">🔍 智能识别并导入</button><button id="smart-import-file-btn" class="btn-mini bg-emerald-500 text-white hover:bg-emerald-600 shadow-md font-semibold">📂 从文件导入</button><input type="file" id="smart-import-file" accept=".txt" class="hidden"><span id="smart-import-result" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] hidden"></span></div></div>
+                    <div class="settings-card-body hidden"><textarea id="smart-import-text" rows="8" class="w-full border border-[var(--primary)]/30 dark:border-[var(--primary)]/20 rounded-xl p-3 text-sm bg-white/60 dark:bg-gray-800/50 focus:ring-2 focus:ring-[var(--primary)]/25 transition-all resize-none" placeholder="粘贴混合内容（文字+颜文字），自动识别分类…&#10;例如：&#10;今天很开心&#10;(๑•̀ㅂ•́)و✧&#10;晚安好梦&#10;qwq"></textarea><div class="flex flex-wrap items-center gap-2 mt-2.5"><button id="smart-import-btn" class="btn-mini btn-mini-primary">🔍 智能识别并导入</button><button id="smart-import-file-btn" class="btn-mini btn-mini-primary">📂 从文件导入</button><input type="file" id="smart-import-file" accept=".txt" class="hidden"><span id="smart-import-result" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] hidden"></span></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-images"></i> 图片表情库<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="flex gap-2 mb-2.5"><button id="import-img-emoji-btn" class="btn-mini bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm">📷 导入图片</button><input type="file" id="img-emoji-input" accept="image/*" multiple class="hidden"><button id="clear-img-emoji" class="btn-mini bg-red-500 text-white hover:bg-red-600 shadow-sm">🗑 清空</button></div><div id="img-emoji-manage-grid" class="flex flex-wrap gap-2 max-h-32 overflow-y-auto no-scrollbar p-1"></div><div id="img-emoji-manage-empty" class="text-xs text-[var(--text-secondary)] text-center py-3">暂无图片表情</div></div>
+                    <div class="settings-card-body hidden"><div class="flex gap-2 mb-2.5"><button id="import-img-emoji-btn" class="btn-mini btn-mini-primary">📷 导入图片</button><input type="file" id="img-emoji-input" accept="image/*" multiple class="hidden"><button id="clear-img-emoji" class="btn-mini btn-mini-danger">🗑 清空</button></div><div id="img-emoji-manage-grid" class="flex flex-wrap gap-2 max-h-45 overflow-y-auto no-scrollbar p-1"></div><div id="img-emoji-manage-empty" class="text-xs text-[var(--text-secondary)] text-center py-3">暂无图片表情</div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-music"></i> 音频库 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（铃声/语音片段，支持MP3等格式 + 网易云外链）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="mb-3 p-3 bg-pink-50 dark:bg-pink-900/15 rounded-xl border border-pink-200 dark:border-pink-700/30"><span class="text-[11px] font-semibold text-pink-600 dark:text-pink-400 block mb-2">🔗 添加网易云外链</span><div class="flex gap-2 items-center"><input type="text" id="netease-url-input" placeholder="输入歌曲ID或完整外链URL…" class="flex-1 h-9 border border-pink-200 dark:border-pink-600 rounded-xl px-3 text-xs bg-white dark:bg-gray-700/50 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] focus:ring-2 focus:ring-pink-400/30 transition-all"><button id="add-netease-url-btn" class="btn-mini bg-pink-500 text-white hover:bg-pink-600 shadow-sm flex-shrink-0">➕ 添加</button></div><p class="text-[9px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-1.5">支持格式：歌曲ID（如 123456）或完整链接（如 https://music.163.com/song/media/outer/url?id=123456.mp3）</p></div><div class="flex gap-2 mb-2.5 flex-wrap"><button id="import-audio-btn" class="btn-mini bg-pink-500 text-white hover:bg-pink-600 shadow-sm">🎵 导入音频文件</button><input type="file" id="audio-input" accept="audio/*,.mp3,.wav,.ogg,.aac,.m4a,.flac" class="hidden"><button id="import-audio-pack-btn" class="btn-mini bg-purple-500 text-white hover:bg-purple-600 shadow-sm">📦 导入音频包</button><input type="file" id="audio-pack-input" accept=".json" class="hidden"><button id="export-audio-pack-btn" class="btn-mini bg-teal-500 text-white hover:bg-teal-600 shadow-sm">📤 导出音频包</button><button id="clear-all-audio" class="btn-mini bg-red-500 text-white hover:bg-red-600 shadow-sm">🗑 清空全部</button></div><div id="audio-manage-list" class="flex flex-col gap-1.5 max-h-40 overflow-y-auto no-scrollbar p-1"></div><div id="audio-manage-empty" class="text-xs text-[var(--text-secondary)] text-center py-3">暂无音频文件</div><span id="audio-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-2 block">共 0 个音频</span></div>
+                    <div class="settings-card-body hidden"><div class="mb-3 p-3 bg-pink-50 dark:bg-pink-900/15 rounded-xl border border-pink-200 dark:border-pink-700/30"><span class="text-[11px] font-semibold text-pink-600 dark:text-pink-400 block mb-2">🔗 添加网易云外链</span><div class="flex gap-2 items-center"><input type="text" id="netease-url-input" placeholder="输入歌曲ID或完整外链URL…" class="flex-1 h-10 border border-pink-200 dark:border-pink-600 rounded-xl px-3 text-xs bg-white dark:bg-gray-700/50 text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] focus:ring-2 focus:ring-pink-400/30 transition-all"><button id="add-netease-url-btn" class="btn-mini btn-mini-primary">➕ 添加</button></div><p class="text-[9px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-1.5">支持格式：歌曲ID（如 123456）或完整链接（如 https://music.163.com/song/media/outer/url?id=123456.mp3）</p></div><div class="flex gap-2 mb-2.5 flex-wrap"><button id="import-audio-btn" class="btn-mini btn-mini-primary">🎵 导入音频文件</button><input type="file" id="audio-input" accept="audio/*,.mp3,.wav,.ogg,.aac,.m4a,.flac" class="hidden"><button id="import-audio-pack-btn" class="btn-mini btn-mini-primary">📦 导入音频包</button><input type="file" id="audio-pack-input" accept=".json" class="hidden"><button id="export-audio-pack-btn" class="btn-mini btn-mini-primary">📤 导出音频包</button><button id="clear-all-audio" class="btn-mini btn-mini-danger">🗑 清空全部</button></div><div id="audio-manage-list" class="flex flex-col gap-1.5 max-h-80 overflow-y-auto no-scrollbar p-1"></div><div id="audio-manage-empty" class="text-xs text-[var(--text-secondary)] text-center py-3">暂无音频文件</div><span id="audio-count-badge" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-2 block">共 0 个音频</span></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-flask"></i> 实验室 <span class="text-[10px] font-normal normal-case text-[var(--text-secondary)] ml-1">（自定义气泡CSS）</span><span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="pt-2"><span class="text-xs font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-2 flex items-center gap-1.5"><i class="fa-solid fa-code text-[var(--primary)]"></i> 自定义聊天气泡CSS<span class="text-[10px] font-normal text-[var(--text-secondary)]">（不随主题切换）</span></span><textarea id="custom-bubble-css" rows="8" class="custom-css-textarea w-full border border-[var(--primary)]/40 dark:border-[var(--primary)]/30 rounded-xl p-3 text-sm bg-white/60 dark:bg-gray-800/50 focus:ring-2 focus:ring-[var(--primary)]/25 transition-all resize-none" placeholder="在此粘贴自定义气泡CSS代码…"></textarea><div class="flex flex-wrap items-center gap-2 mt-2"><button id="apply-custom-css-btn" class="btn-mini bg-[var(--primary)] text-white hover:opacity-85 shadow-md font-semibold">✅ 应用自定义气泡</button><button id="reset-custom-css-btn" class="btn-mini bg-gray-400 text-white hover:bg-gray-500 shadow-sm">🔄 恢复默认</button><button id="show-css-example-btn" class="btn-mini bg-amber-500 text-white hover:bg-amber-600 shadow-sm">💡 查看示例</button></div><div id="custom-css-status" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-2 hidden"></div></div></div>
+                    <div class="settings-card-body hidden"><div class="pt-2"><span class="text-xs font-semibold text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] block mb-2 flex items-center gap-1.5"><i class="fa-solid fa-code text-[var(--primary)]"></i> 自定义聊天气泡CSS<span class="text-[10px] font-normal text-[var(--text-secondary)]">（不随主题切换）</span></span><textarea id="custom-bubble-css" rows="8" class="custom-css-textarea w-full border border-[var(--primary)]/40 dark:border-[var(--primary)]/30 rounded-xl p-3 text-sm bg-white/60 dark:bg-gray-800/50 focus:ring-2 focus:ring-[var(--primary)]/25 transition-all resize-none" placeholder="在此粘贴自定义气泡CSS代码…"></textarea><div class="flex flex-wrap items-center gap-2 mt-2"><button id="apply-custom-css-btn" class="btn-mini btn-mini-primary">✅ 应用自定义气泡</button><button id="reset-custom-css-btn" class="btn-mini btn-mini-secondary">🔄 恢复默认</button><button id="show-css-example-btn" class="btn-mini btn-mini-secondary">💡 查看示例</button></div><div id="custom-css-status" class="text-[10px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-2 hidden"></div></div></div>
                 </div>
                 <div class="settings-card">
                     <div class="settings-section-title" onclick="toggleFold(this)"><i class="fa-solid fa-database"></i> 数据管理<span class="fold-icon">▸</span></div>
-                    <div class="settings-card-body hidden"><div class="flex flex-col gap-2"><button id="export" class="text-sm px-4 py-2.5 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors font-semibold shadow-sm w-full">📤 导出全部记录</button><button id="import-btn" class="text-sm px-4 py-2.5 bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors font-semibold shadow-sm w-full">📥 导入全部记录</button><input type="file" id="import-file" class="hidden" accept=".json"><button id="clear-all" class="text-sm px-4 py-2.5 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors font-semibold shadow-sm w-full">🗑 清空所有对话</button></div></div>
+                    <div class="settings-card-body hidden"><div class="flex flex-col gap-2"><button id="export" class="text-sm px-4 py-2.5 rounded-full transition-colors font-semibold shadow-sm w-full btn-mini-primary">📤 导出全部记录</button><button id="import-btn" class="text-sm px-4 py-2.5 rounded-full transition-colors font-semibold shadow-sm w-full btn-mini-primary">📥 导入全部记录</button><input type="file" id="import-file" class="hidden" accept=".json"><button id="clear-all" class="text-sm px-4 py-2.5 rounded-full transition-colors font-semibold shadow-sm w-full btn-mini-danger">🗑 清空所有对话</button></div></div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- 朋友圈 -->
     <div id="moments-overlay" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden moments-overlay-fade">
         <div class="absolute inset-0 flex flex-col max-w-lg mx-auto bg-[var(--surface)] dark:bg-[var(--surface-dark)] shadow-2xl">
             <div class="flex items-center justify-between px-4 py-3 border-b border-[var(--border)] dark:border-[var(--border-dark)] bg-blur flex-shrink-0">
@@ -1151,7 +1403,7 @@
         <div class="bg-[var(--surface)] dark:bg-[var(--surface-dark)] w-full max-w-lg rounded-t-3xl p-5 shadow-2xl animate-slideUp">
             <div class="flex justify-between items-center mb-3"><span class="font-bold text-lg text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]">发布朋友圈</span><button id="close-post-modal" class="w-8 h-8 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/8 hover:bg-black/[0.08] dark:hover:bg-white/12 transition-colors text-sm">✕</button></div>
             <textarea id="post-content" rows="5" class="w-full border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl p-3 text-sm bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] resize-none text-[var(--text-primary)] dark:text-[var(--text-primary-dark)] placeholder:text-[var(--text-secondary)] focus:ring-2 focus:ring-[var(--primary)]/20 transition-all" placeholder="这一刻的想法…"></textarea>
-            <div class="flex gap-2 my-3"><button id="add-post-image" class="btn-mini bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-500">📷 添加图片</button><input type="file" id="post-image-input" accept="image/*" multiple hidden><span class="text-[10px] text-[var(--text-secondary)] self-center" id="post-image-count">最多9张</span></div>
+            <div class="flex gap-2 my-3"><button id="add-post-image" class="btn-mini btn-mini-secondary">📷 添加图片</button><input type="file" id="post-image-input" accept="image/*" multiple hidden><span class="text-[10px] text-[var(--text-secondary)] self-center" id="post-image-count">最多9张</span></div>
             <div id="post-image-preview" class="flex gap-2 overflow-x-auto pb-2 no-scrollbar"></div>
             <button id="publish-moment" class="mt-3 w-full py-3 bg-[var(--primary)] text-white rounded-2xl font-semibold shadow-lg active:scale-95 transition-transform">发布</button>
         </div>
@@ -1196,7 +1448,7 @@
             const colorMap = { c1: '#5B7FFF', c2: '#4ECB71', c3: '#FF8C42', c4: '#F0626E', c5: '#8B5CF6', c6: '#F472B6',
                 c7: '#2DD4BF' };
             const themeClasses = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
-            const defaultCfg = { dark: 0, c: 'c1', myN: '我', loN: '梦角', myA: DEFAULT_MY_AVATAR, loA: DEFAULT_LO_AVATAR,
+            const defaultCfg = { dark: 0, c: 'c1', myN: '我', loN: 'Ta', myA: DEFAULT_MY_AVATAR, loA: DEFAULT_LO_AVATAR,
                 bg: DEFAULT_BG, replySpeed: 4, activeMsg: false, replyCount: 1, quoteReply: false, readIgnore: false,
                 fontSize: 14, customBubbleCSS: '', momentEnabled: false, momentDailyCount: 1, momentStartHour: 8,
                 momentStartMin: 0, momentEndHour: 23, momentEndMin: 0, momentReplyEnabled: false, momentReplyDelay: 60,
@@ -1231,6 +1483,36 @@
             let letters = S('letters') || [];
             let moments = S('moments') || [];
             let count = S('count') || 0;
+            // ---------- 新增：每日自动重置传讯次数 ----------
+            function getTodayStr() {
+                const d = new Date();
+                return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+            }
+            
+            function checkAndResetDailyCount() {
+                const todayStr = getTodayStr();
+                const storedDate = localStorage.getItem('mc_countDate');
+                if (storedDate !== todayStr) {
+                    count = 0;
+                    SS('count', count);
+                    localStorage.setItem('mc_countDate', todayStr);
+                    updateCountDisplay();
+                }
+            }
+            
+            function scheduleMidnightReset() {
+                const now = new Date();
+                const midnight = new Date(now);
+                midnight.setHours(24, 0, 0, 0); // 今天午夜 00:00
+                const msUntilMidnight = midnight - now;
+                setTimeout(() => {
+                    checkAndResetDailyCount();
+                    // 每天午夜执行一次后，重新设置下一个午夜的定时器
+                    scheduleMidnightReset();
+                }, msUntilMidnight);
+            }
+            // ---------- 新增结束 ----------
+            
             let quote = null;
             let activeMenuMsgId = null;
             let momentCommentQuote = null;
@@ -1333,6 +1615,13 @@
                 incomingTimer: null,
             };
 
+            // 新增加：记录最后在线时间戳
+            let lastOnlineTime = parseFloat(localStorage.getItem('mc_lastOnlineTime') || '0');
+            function updateLastOnlineTime() {
+                lastOnlineTime = Date.now();
+                localStorage.setItem('mc_lastOnlineTime', lastOnlineTime);
+            }
+
             function getCustomBubbleStyleEl() {
                 if (!customBubbleStyleEl) {
                     customBubbleStyleEl = document.getElementById('custom-bubble-style');
@@ -1372,7 +1661,7 @@
 
             function showCSSExample() {
                 const example =
-                    `/* 自定义聊天气泡CSS示例 */\n/* 这些样式不受日间/夜间模式切换影响 */\n\n/* 我的气泡（右侧） */\n.bubble-me {\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;\n  border-radius: 20px 20px 6px 20px !important;\n  color: #ffffff !important;\n  box-shadow: 0 4px 16px rgba(102,126,234,0.35) !important;\n}\n\n/* 梦角气泡（左侧） */\n.bubble-you {\n  background: #f5f5f7 !important;\n  border-radius: 20px 20px 20px 6px !important;\n  color: #1a1a2e !important;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;\n}\n\n/* 暗色模式下梦角气泡保持统一 */\n.dark .bubble-you {\n  background: #f5f5f7 !important;\n  color: #1a1a2e !important;\n}`;
+                    `/* 自定义聊天气泡CSS示例 */\n/* 这些样式不受日间/夜间模式切换影响 */\n\n/* 我的气泡（右侧） */\n.bubble-me {\n  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;\n  border-radius: 20px 20px 6px 20px !important;\n  color: #ffffff !important;\n  box-shadow: 0 4px 16px rgba(102,126,234,0.35) !important;\n}\n\n/* Ta气泡（左侧） */\n.bubble-you {\n  background: #f5f5f7 !important;\n  border-radius: 20px 20px 20px 6px !important;\n  color: #1a1a2e !important;\n  box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;\n}\n\n/* 暗色模式下Ta气泡保持统一 */\n.dark .bubble-you {\n  background: #f5f5f7 !important;\n  color: #1a1a2e !important;\n}`;
                 if (customBubbleCSSTextarea) { customBubbleCSSTextarea.value = example;
                     customBubbleCSSTextarea.focus(); }
                 showToast('示例代码已填入，可修改后点击"应用"', '💡');
@@ -1531,7 +1820,7 @@
                     .classList.remove('hidden'); else { imgEmojiEmpty.classList.add('hidden');
                     imgEmojis.forEach(b64 => { const wrap = document.createElement('div');
                         wrap.className =
-                            'w-14 h-14 rounded-xl overflow-hidden border border-[var(--border)] dark:border-[var(--border-dark)] flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-[var(--primary)]/50 transition-all active:scale-95 shadow-sm';
+                            'w-20 h-20 rounded-xl overflow-hidden border border-[var(--border)] dark:border-[var(--border-dark)] flex-shrink-0 cursor-pointer hover:ring-2 hover:ring-[var(--primary)]/50 transition-all active:scale-95 shadow-sm';
                         wrap.innerHTML =
                             `<img src="${b64}" class="w-full h-full object-cover" alt="表情" loading="lazy">`;
                         wrap.onclick = (e) => { e.stopPropagation();
@@ -1569,7 +1858,7 @@
                         const typeTag = isNetease ?
                             '<span class="text-[9px] bg-red-100 dark:bg-red-800/30 text-red-500 dark:text-red-400 px-1.5 py-0.5 rounded-full flex-shrink-0">网易云</span>' :
                             '';
-                        row.innerHTML = `${typeTag}<span class="flex-1 truncate font-medium text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]">${a.name || '音频'+(idx+1)}</span><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/6 hover:bg-black/[0.08] dark:hover:bg-white/10 flex-shrink-0" data-edit="${idx}" title="编辑歌名"><i class="fa-solid fa-pen text-[9px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-[var(--primary)] text-white flex-shrink-0 shadow-sm" data-play="${idx}" title="播放/暂停"><i class="fa-solid fa-play text-[9px]"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-teal-100 dark:bg-teal-800/30 hover:bg-teal-200 dark:hover:bg-teal-700/40 flex-shrink-0" data-export-one="${idx}" title="导出此音频"><i class="fa-solid fa-download text-[9px] text-teal-500 dark:text-teal-400"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-800/30 hover:bg-red-200 dark:hover:bg-red-700/40 flex-shrink-0" data-del="${idx}" title="删除"><i class="fa-solid fa-trash-can text-[9px] text-red-500 dark:text-red-400"></i></button>`;
+                        row.innerHTML = `${typeTag}<span class="flex-1 truncate font-medium text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]">${a.name || '音频'+(idx+1)}</span><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/6 hover:bg-black/[0.08] dark:hover:bg-white/10 flex-shrink-0" data-edit="${idx}" title="编辑歌名"><i class="fa-solid fa-pen text-[9px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-[var(--primary)] text-white flex-shrink-0 shadow-sm" data-play="${idx}" title="播放/暂停"><i class="fa-solid fa-play text-[9px]"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-black/[0.04] dark:bg-white/6 hover:bg-black/[0.08] dark:hover:bg-white/10 flex-shrink-0" data-export-one="${idx}" title="导出此音频"><i class="fa-solid fa-download text-[9px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)]"></i></button><button class="audio-btn w-7 h-7 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-800/30 hover:bg-red-200 dark:hover:bg-red-700/40 flex-shrink-0" data-del="${idx}" title="删除"><i class="fa-solid fa-trash-can text-[9px] text-red-500 dark:text-red-400"></i></button>`;
                         row.querySelector('[data-play]').onclick = (e) => { e.stopPropagation(); const i =
                                 parseInt(e.currentTarget.dataset.play);
                             audioManager.play(i); };
@@ -1620,7 +1909,7 @@
                         isNetease: a.isNetease || false, id: a.id })) }; const blob = new Blob([JSON.stringify(pack)], {
                     type: 'application/json' }); const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
-                a.download = '梦角音频包_' + now() + '.json';
+                a.download = 'Ta音频包_' + now() + '.json';
                 a.click();
                 showToast(`已导出 ${audios.length} 个音频`, '📤'); }
 
@@ -1690,17 +1979,69 @@
                     return; } if (letterEmpty) letterEmpty.classList.add('hidden');
                 letters.forEach((l, i) => { const rep = l.rep > now(); const div = document.createElement('div');
                     div.className =
-                        'p-3 border border-[var(--border)] dark:border-[var(--border-dark)] rounded-xl bg-[var(--surface-elevated)] dark:bg-[var(--surface-elevated-dark)] text-xs shadow-sm';
-                    div.innerHTML =
-                        `<div class="flex items-center justify-between"><span class="font-semibold">${new Date(l.time).toLocaleString()}</span><button class="delete-letter-btn w-5 h-5 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-800/30 hover:bg-red-200 dark:hover:bg-red-700/40 transition-colors text-[10px] text-red-500 dark:text-red-400 flex-shrink-0" data-letter-idx="${i}" title="删除信件"><i class="fa-solid fa-trash-can text-[9px]"></i></button></div><div class="text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-1">${rep?'⏳ 等待回信…':'✅ 回信已抵达'}</div>${!rep?`<div class="mt-2 text-[var(--primary)] cursor-pointer hover:underline font-semibold" onclick="window.lookLetter(${i})">📖 查看回信</div>`:''}`;
+                        'letter-card flex items-start gap-3';
+                    const statusDotClass = rep ? 'waiting' : 'arrived';
+                    const statusText = rep ? '⏳ 等待回信' : '✅ 回信已抵达';
+                    const actionHtml = !rep ?
+                        `<button class="view-letter-btn text-[11px] font-semibold text-[var(--primary)] hover:underline mt-1.5 flex items-center gap-1" data-letter-idx="${i}"><i class="fa-solid fa-book-open text-[10px]"></i> 查看回信</button>` :
+                        '';
+                    div.innerHTML = `
+                <span class="letter-status-dot ${statusDotClass} mt-1"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-semibold text-[12px] text-[var(--text-primary)] dark:text-[var(--text-primary-dark)]">${new Date(l.time).toLocaleString('zh-CN',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}</span>
+                    <button class="delete-letter-btn w-5 h-5 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-800/30 hover:bg-red-200 dark:hover:bg-red-700/40 transition-colors text-[10px] text-red-500 dark:text-red-400 flex-shrink-0" data-letter-idx="${i}" title="删除信件"><i class="fa-solid fa-trash-can text-[9px]"></i></button>
+                  </div>
+                  <div class="text-[11px] text-[var(--text-secondary)] dark:text-[var(--text-secondary-dark)] mt-1 flex items-center gap-1.5">
+                    <span>${statusText}</span>
+                    ${!rep ? '<span class="text-[10px] bg-emerald-100 dark:bg-emerald-800/30 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded-full">可查看</span>' : '<span class="text-[10px] bg-amber-100 dark:bg-amber-800/30 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded-full">回信准备中</span>'}
+                  </div>
+                  ${actionHtml}
+                </div>`;
                     letterList.appendChild(div); });
                 letterList.querySelectorAll('.delete-letter-btn').forEach(btn => {
                     btn.onclick = function(e) { e.stopPropagation(); const idx = parseInt(this.dataset.letterIdx);
                         deleteLetter(idx); };
+                });
+                letterList.querySelectorAll('.view-letter-btn').forEach(btn => {
+                    btn.onclick = function(e) { e.stopPropagation(); const idx = parseInt(this.dataset.letterIdx);
+                        window.lookLetter(idx); };
                 }); }
-            window.lookLetter = (i) => { const l = letters[i]; if (!l) return; let replyText = '暂无回复'; if (l.reply) { if (Array
-                        .isArray(l.reply)) { replyText = l.reply.join('，'); } else { replyText = l.reply; } }
-                alert('【我】\n' + (Array.isArray(l.content) ? l.content.join('\n') : l.content) + '\n\n【梦角】\n' + replyText); };
+
+            window.lookLetter = (i) => {
+                const l = letters[i];
+                if (!l) return;
+
+                const myContent = Array.isArray(l.content) ? l.content.join('\n') : l.content;
+                const replyContent = l.reply ?
+                    (Array.isArray(l.reply) ? l.reply.join('\n') : l.reply) :
+                    '暂无回复';
+
+                const myContentDiv = document.getElementById('letter-view-my-content');
+                const replyDiv = document.getElementById('letter-view-lover-reply');
+                if (myContentDiv) myContentDiv.textContent = myContent;
+                if (replyDiv) replyDiv.textContent = replyContent;
+
+                const modal = document.getElementById('letter-view-modal');
+                if (modal) modal.classList.remove('hidden');
+            };
+
+            const closeLetterViewBtn = document.getElementById('close-letter-view');
+            const letterViewModal = document.getElementById('letter-view-modal');
+
+            if (closeLetterViewBtn) {
+                closeLetterViewBtn.onclick = () => {
+                    if (letterViewModal) letterViewModal.classList.add('hidden');
+                };
+            }
+
+            if (letterViewModal) {
+                letterViewModal.addEventListener('click', function(e) {
+                    if (e.target === letterViewModal) {
+                        letterViewModal.classList.add('hidden');
+                    }
+                });
+            }
 
             function addCallSystemMessage(content) { const id = now() + Math.random(); const m = { id, role: 'system',
                     type: 'call', content, time: fmt(now()), read: 1 };
@@ -1768,7 +2109,7 @@
             function exportWords() { if (words.length === 0) { showToast('字卡库为空，无法导出', '⚠'); return; } const blob = new Blob([words.join(
                     '\n')], { type: 'text/plain;charset=utf-8' }); const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
-                a.download = '梦角字卡_' + now() + '.txt';
+                a.download = 'Ta字卡_' + now() + '.txt';
                 a.click();
                 showToast(`已导出 ${words.length} 条字卡`, '📤'); }
 
@@ -1796,7 +2137,7 @@
             function exportEmojis() { if (emojis.length === 0) { showToast('表情库为空，无法导出', '⚠'); return; } const blob = new Blob(
                     [emojis.join('\n')], { type: 'text/plain;charset=utf-8' }); const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
-                a.download = '梦角表情_' + now() + '.txt';
+                a.download = 'Ta表情_' + now() + '.txt';
                 a.click();
                 showToast(`已导出 ${emojis.length} 条表情`, '📤'); }
 
@@ -1897,33 +2238,46 @@
             async function sendImageFromFile(file, role) { try { const b64 = await compressImage(file, 600, 0.5);
                     sendImage(b64, role); } catch (e) { alert('图片处理失败，请重试'); } }
 
-            function sendImage(b64, role) { const id = now() + Math.random(); const m = { id, role, type: 'image', content: b64,
-                    time: fmt(now()), read: role === 'me' ? 0 : 1, quote };
+            function sendImage(b64, role) {
+                const id = now() + Math.random();
+                const m = { id, role, type: 'image', content: b64, time: fmt(now()), read: role === 'me' ? 0 : 1, quote };
                 quote = null;
                 quoteHint.classList.add('hidden');
                 closeActionMenu();
                 msgs.push(m);
                 trimMessages();
                 SS('msgs', msgs);
-                renderMessages(); if (role === 'me') { count++;
+                renderMessages();
+                if (role === 'me') {
+                    checkAndResetDailyCount();  // ← 新增
+                    count++;
                     SS('count', count);
                     updateCountDisplay();
                     scheduleLoReply();
-                    maybeTriggerIncomingCall(); } }
+                    maybeTriggerIncomingCall();
+                }
+            }
 
-            function sendText(text, role) { if (!text?.trim()) return; const id = now() + Math.random(); const m = { id, role,
-                    type: 'text', content: text.trim(), time: fmt(now()), read: role === 'me' ? 0 : 1, quote };
+            function sendText(text, role) {
+                if (!text?.trim()) return;
+                const id = now() + Math.random();
+                const m = { id, role, type: 'text', content: text.trim(), time: fmt(now()), read: role === 'me' ? 0 : 1, quote };
                 quote = null;
                 quoteHint.classList.add('hidden');
                 closeActionMenu();
                 msgs.push(m);
                 trimMessages();
                 SS('msgs', msgs);
-                renderMessages(); if (role === 'me') { count++;
+                renderMessages();
+                if (role === 'me') {
+                    checkAndResetDailyCount();  // ← 新增：发消息前先检查是否跨天
+                    count++;
                     SS('count', count);
                     updateCountDisplay();
                     scheduleLoReply();
-                    maybeTriggerIncomingCall(); } }
+                    maybeTriggerIncomingCall();
+                }
+            }
 
             function updateCountDisplay() { countText.innerText = `今日传讯：${count}次`; }
 
@@ -2121,21 +2475,29 @@
                             addComment(momentId, content, quoteId);
                             this.value = '';
                             row.classList.add('hidden'); } } }); });
-                momentsList.querySelectorAll('.comment-item').forEach(item => { const momentId = parseFloat(item.dataset.momentId); const
-                        commentId = parseFloat(item.dataset.commentId);
-                    item.addEventListener('click', function(e) { if (e.target.closest('.delete-comment-btn')) return; const moment =
-                            moments.find(m => m.id === momentId); if (!moment) return; const comment = moment.comments.find(c =>
-                            c.id === commentId); if (!comment) return; const preview = comment.content.length > 20 ? comment
-                            .content.substring(0, 20) + '…' : comment.content;
-                        momentCommentQuote = { momentId, commentId, preview }; const hint = momentsList.querySelector(
-                            `.comment-quote-hint[data-moment-id="${momentId}"]`); if (hint) { hint.classList.remove('hidden');
-                            hint.querySelector('span').textContent = '引用了: ' + preview; } const row = momentsList.querySelector(
-                            `.comment-input-row[data-id="${momentId}"]`); if (row) { row.classList.remove('hidden');
-                            row.querySelector('.comment-input').focus(); } }); let timer;
-                    item.addEventListener('touchstart', function(e) { timer = setTimeout(() => { if (confirm('确定删除这条评论吗？')) {
-                                deleteComment(momentId, commentId); } }, 500); });
+                momentsList.querySelectorAll('.comment-item').forEach(item => {
+                    const momentId = parseFloat(item.dataset.momentId);
+                    const commentId = parseFloat(item.dataset.commentId);
+                    const moment = moments.find(m => m.id === momentId);
+                    if (!moment) return;
+                    const comment = moment.comments.find(c => c.id === commentId);
+                    if (!comment) return;
+                
+                    // 只有自己的评论才绑定长按删除
+                    if (comment.author !== 'me') return;
+                
+                    item.addEventListener('click', function(e) { /* 原有点击引用逻辑不变 */ });
+                    let timer;
+                    item.addEventListener('touchstart', function(e) {
+                        timer = setTimeout(() => {
+                            if (confirm('确定删除这条评论吗？')) {
+                                deleteComment(momentId, commentId);
+                            }
+                        }, 500);
+                    });
                     item.addEventListener('touchend', () => clearTimeout(timer));
-                    item.addEventListener('touchmove', () => clearTimeout(timer)); });
+                    item.addEventListener('touchmove', () => clearTimeout(timer));
+                });
                 momentsList.querySelectorAll('.delete-comment-btn').forEach(btn => { btn.addEventListener('click', function(e) { e
                         .stopPropagation(); const momentId = parseFloat(this.dataset.momentId); const commentId = parseFloat(
                             this.dataset.commentId); if (confirm('确定删除这条评论吗？')) { deleteComment(momentId, commentId); } }); });
@@ -2190,7 +2552,7 @@
                     .momentId === momentId)) return; const maxMinutes = cfg.momentReplyDelay || 60; const delayMs = Math.random() *
                     maxMinutes * 60 * 1000; const replyTime = now() + delayMs; const replyDate = new Date(replyTime);
                 showToast(
-                    `💌 梦角会在 ${String(replyDate.getHours()).padStart(2,'0')}:${String(replyDate.getMinutes()).padStart(2,'0')} 左右回复`,
+                    `💌 Ta会在 ${String(replyDate.getHours()).padStart(2,'0')}:${String(replyDate.getMinutes()).padStart(2,'0')} 左右回复`,
                     '⏳');
                 scheduledMomentReplies.push({ momentId: momentId, replyTime: replyTime, retried: false });
                 saveScheduledReplies(); const timerId = setTimeout(() => { executeScheduledReply(momentId); }, delayMs); if (!window
@@ -2202,14 +2564,29 @@
                     Boolean); if (textPool.length === 0) { removeScheduledTask(momentId); return; } let acted = false; if (!moment
                     .likes) moment.likes = []; if (!moment.comments) moment.comments = []; const alreadyLiked = moment.likes.some(
                     l => l.author === 'lover'); if (!alreadyLiked) { moment.likes.push({ author: 'lover', time: now() });
-                    acted = true; } if (moment.comments.filter(c => c.author === 'lover').length < 2) { let quoteId = null; if (
-                        Math.random() < 0.3) { const myComments = moment.comments.filter(c => c.author === 'me').sort((a, b) => b
-                            .time - a.time); if (myComments.length > 0) { quoteId = myComments[0].id; } }
-                    moment.comments.push({ id: now() + Math.random(), author: 'lover', content: textPool[Math.floor(Math
-                                .random() * textPool.length)], time: now(), quoteId: quoteId });
-                    acted = true; } if (acted) { SS('moments', moments); if (momentsOverlay && !momentsOverlay.classList.contains(
+                    acted = true; } 
+                    if (moment.comments.filter(c => c.author === 'lover').length < 2) {
+                        let quoteId = null;
+                        const myComments = moment.comments.filter(c => c.author === 'me').sort((a, b) => b.time - a.time);
+                        if (myComments.length > 0) {
+                            // 🔁 如果我的最后一条评论已经引用了别人，对方必须引用回我的这条评论
+                            if (myComments[0].quoteId) {
+                                quoteId = myComments[0].id;
+                            } else if (Math.random() < 0.3) {
+                                quoteId = myComments[0].id;
+                            }
+                        }
+                        moment.comments.push({
+                            id: now() + Math.random(),
+                            author: 'lover',
+                            content: textPool[Math.floor(Math.random() * textPool.length)],
+                            time: now(),
+                            quoteId: quoteId
+                        });
+                        acted = true;
+                    } if (acted) { SS('moments', moments); if (momentsOverlay && !momentsOverlay.classList.contains(
                             'hidden')) { renderMoments(); }
-                    showToast('梦角回复了你的朋友圈~', '💬'); }
+                    showToast('Ta回复了你的朋友圈~', '💬'); }
                 removeScheduledTask(momentId); }
 
             function removeScheduledTask(momentId) { scheduledMomentReplies = scheduledMomentReplies.filter(t => t.momentId !==
@@ -2228,7 +2605,7 @@
                         nowDate);
                     nextDate.setDate(nextDate.getDate() + 1);
                     nextDate.setHours(cfg.momentStartHour || 8, cfg.momentStartMin || 0, 0, 0); const delay = nextDate - nowDate;
-                    loverMomentTimer = setTimeout(() => { createLoverMoment();
+                    loverMomentTimer = setTimeout(() => { const m = createLoverMoment(); if (m) { moments.unshift(m); trimMoments(); SS('moments', moments); todayLoverMomentCount++; lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + new Date().getDate(); if (momentsOverlay && !momentsOverlay.classList.contains('hidden')) { renderMoments(); } }
                         scheduleNextLoverMoment(); }, delay); return; } const startMinutes = (cfg.momentStartHour || 8) * 60 + (cfg
                         .momentStartMin || 0); const endMinutes = (cfg.momentEndHour || 23) * 60 + (cfg.momentEndMin || 0); const
                     currentMinutes = nowDate.getHours() * 60 + nowDate.getMinutes(); const remainingSlots = cfg.momentDailyCount -
@@ -2236,27 +2613,62 @@
                         endMinutes || remainingSlots <= 0) { const nextDate = new Date(nowDate);
                     nextDate.setDate(nextDate.getDate() + 1);
                     nextDate.setHours(cfg.momentStartHour || 8, cfg.momentStartMin || 0, 0, 0); const delay = nextDate - nowDate;
-                    loverMomentTimer = setTimeout(() => { createLoverMoment();
+                    loverMomentTimer = setTimeout(() => { const m = createLoverMoment(); if (m) { moments.unshift(m); trimMoments(); SS('moments', moments); todayLoverMomentCount++; lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + new Date().getDate(); if (momentsOverlay && !momentsOverlay.classList.contains('hidden')) { renderMoments(); } }
                         scheduleNextLoverMoment(); }, delay); return; } const slotSize = (endMinutes - availableStart) /
                     remainingSlots; const randomOffset = Math.random() * slotSize; const targetMinutes = availableStart +
                     randomOffset; const targetDate = new Date(nowDate);
                 targetDate.setHours(Math.floor(targetMinutes / 60), Math.floor(targetMinutes % 60), 0, 0); const delay = targetDate -
-                    nowDate; if (delay <= 0) { createLoverMoment();
+                    nowDate; if (delay <= 0) { const m = createLoverMoment(); if (m) { moments.unshift(m); trimMoments(); SS('moments', moments); todayLoverMomentCount++; lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + new Date().getDate(); if (momentsOverlay && !momentsOverlay.classList.contains('hidden')) { renderMoments(); } }
                     scheduleNextLoverMoment(); return; }
-                loverMomentTimer = setTimeout(() => { createLoverMoment();
+                loverMomentTimer = setTimeout(() => { const m = createLoverMoment(); if (m) { moments.unshift(m); trimMoments(); SS('moments', moments); todayLoverMomentCount++; lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth()+1) + '-' + new Date().getDate(); if (momentsOverlay && !momentsOverlay.classList.contains('hidden')) { renderMoments(); } }
                     scheduleNextLoverMoment(); }, delay); }
 
-            function createLoverMoment() { const pool = momentWords.filter(x => x && x.trim()); if (pool.length === 0 && imgEmojis
-                    .length === 0) return; const content = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : ''; const
-                    images = []; if (imgEmojis.length > 0 && Math.random() < 0.5) { images.push(imgEmojis[Math.floor(Math.random() *
-                        imgEmojis.length)]); } if (!content && images.length === 0) return; const moment = { id: now() + Math
-                        .random(), author: 'lover', content: content, images: images, likes: [], comments: [], time: now() };
-                moments.unshift(moment);
+            function createLoverMoment(timestamp = null) { const pool = momentWords.filter(x => x && x.trim()); if (pool.length === 0 && imgEmojis.length === 0) return null; const content = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : ''; const images = []; if (imgEmojis.length > 0 && Math.random() < 0.5) { images.push(imgEmojis[Math.floor(Math.random() * imgEmojis.length)]); } if (!content && images.length === 0) return null; const moment = { id: now() + Math.random(), author: 'lover', content: content, images: images, likes: [], comments: [], time: timestamp || now() }; return moment; }
+
+            function catchUpLoverMoments() {
+                if (!cfg.momentEnabled || cfg.momentDailyCount <= 0) return;
+                if (!lastOnlineTime) { updateLastOnlineTime(); return; }
+            
+                const nowTs = Date.now();
+                const timePassed = nowTs - lastOnlineTime;
+                if (timePassed < 60 * 1000) { updateLastOnlineTime(); return; }
+            
+                const dailyCount = cfg.momentDailyCount;
+                const startDate = new Date(lastOnlineTime);
+                const endDate = new Date(nowTs);
+                // 只处理到昨天为止，今天交给 scheduleNextLoverMoment
+                const yesterday = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate() - 1);
+                let totalMissed = 0;
+            
+                for (let d = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+                     d <= yesterday; 
+                     d.setDate(d.getDate() + 1)) {
+                    totalMissed += dailyCount;
+                }
+                totalMissed = Math.min(totalMissed, 20);
+            
+                const alreadyGenerated = moments.filter(m => m.time > lastOnlineTime && m.author === 'lover').length;
+                totalMissed = Math.max(0, totalMissed - alreadyGenerated);
+            
+                if (totalMissed <= 0) { updateLastOnlineTime(); return; }
+            
+                for (let i = 0; i < totalMissed; i++) {
+                    const randomOffset = Math.random() * (yesterday.getTime() + 86400000 - lastOnlineTime); // 最后一整天之内
+                    const momentTime = lastOnlineTime + randomOffset;
+                    const moment = createLoverMoment(momentTime);
+                    if (moment) moments.unshift(moment);
+                }
+            
+                moments.sort((a, b) => b.time - a.time);
                 trimMoments();
                 SS('moments', moments);
-                todayLoverMomentCount++;
-                lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(); if (
-                    momentsOverlay && !momentsOverlay.classList.contains('hidden')) { renderMoments(); } }
+                showToast(`💕 Ta在离线期间发布了 ${totalMissed} 条朋友圈`, '📢');
+                // 更新今日计数和日期，防止 schedule 重复安排
+                todayLoverMomentCount = 0; // 今天还没有安排新的
+                lastLoverMomentDate = new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate();
+            
+                updateLastOnlineTime();
+            }
 
             function clearLoverMomentTimer() { if (loverMomentTimer) { clearTimeout(loverMomentTimer);
                     loverMomentTimer = null; } }
@@ -2266,8 +2678,8 @@
                 callVideoBgImg.src = loAvt;
                 callSelfCamImg.src = myAvt;
                 callMiniAvatar.src = loAvt;
-                callNameText.textContent = cfg.loN || '梦角';
-                callMiniName.textContent = cfg.loN || '梦角'; }
+                callNameText.textContent = cfg.loN || 'Ta';
+                callMiniName.textContent = cfg.loN || 'Ta'; }
 
             function resetCallUI() { callStatusText.textContent = '正在等待对方接听...';
                 callStatusText.classList.remove('hidden');
@@ -2410,7 +2822,7 @@
                 updateCallUI();
                 callState.status = 'incoming';
                 callOverlay.classList.remove('hidden', 'closing');
-                callStatusText.textContent = '梦角邀请你语音通话...';
+                callStatusText.textContent = 'Ta邀请你语音通话...';
                 callStatusText.classList.remove('hidden');
                 callAnswerBtn.classList.remove('hidden');
                 callHangupBtn.classList.remove('hidden');
@@ -2527,30 +2939,70 @@
             callMiniWindow.onclick = (e) => { if (e.target === callMiniHangup || callMiniHangup.contains(e.target)) return;
                 restoreCallFromMini(); };
 
-            let isMiniDragging = false; let miniDragStartX, miniDragStartY, miniStartLeft, miniStartTop;
-            callMiniWindow.addEventListener('pointerdown', function(e) { if (e.target === callMiniHangup || callMiniHangup.contains(
-                        e.target)) return;
+            let isMiniDragging = false;
+            let miniDragStartX, miniDragStartY, miniStartLeft, miniStartTop;
+            let miniInitialTransform = { x: 0, y: 0 };
+            
+            callMiniWindow.addEventListener('pointerdown', function(e) {
+                // 忽略挂断按钮上的点击
+                if (e.target === callMiniHangup || callMiniHangup.contains(e.target)) return;
+            
                 isMiniDragging = true;
-                callMiniWindow.style.transition = 'none'; const rect = callMiniWindow.getBoundingClientRect();
+                // 拖动时启用 GPU 加速
+                callMiniWindow.style.willChange = 'transform';
+                callMiniWindow.style.transition = 'none';
+            
+                const rect = callMiniWindow.getBoundingClientRect();
                 miniDragStartX = e.clientX;
                 miniDragStartY = e.clientY;
                 miniStartLeft = rect.left;
                 miniStartTop = rect.top;
+            
+                // 清除之前的 right/bottom，改用 left/top 绝对定位
                 callMiniWindow.style.right = 'auto';
+                callMiniWindow.style.bottom = 'auto';
                 callMiniWindow.style.left = miniStartLeft + 'px';
                 callMiniWindow.style.top = miniStartTop + 'px';
-                callMiniWindow.setPointerCapture(e.pointerId); });
-            window.addEventListener('pointermove', function(e) { if (!isMiniDragging) return; const dx = e.clientX - miniDragStartX; const
-                    dy = e.clientY - miniDragStartY; let newLeft = miniStartLeft + dx; let newTop = miniStartTop + dy; const miniWidth =
-                    callMiniWindow.offsetWidth; const miniHeight = callMiniWindow.offsetHeight;
-                newLeft = Math.max(4, Math.min(newLeft, window.innerWidth - miniWidth - 4));
-                newTop = Math.max(40, Math.min(newTop, window.innerHeight - miniHeight - 20));
-                callMiniWindow.style.left = newLeft + 'px';
-                callMiniWindow.style.top = newTop + 'px';
-                callMiniWindow.style.right = 'auto'; });
-            window.addEventListener('pointerup', function(e) { if (isMiniDragging) { isMiniDragging = false;
-                    callMiniWindow.style.transition = 'box-shadow 0.2s ease';
-                    callMiniWindow.releasePointerCapture(e.pointerId); } });
+                callMiniWindow.style.transform = 'translate(0px, 0px)';
+                miniInitialTransform = { x: 0, y: 0 };
+            
+                callMiniWindow.setPointerCapture(e.pointerId);
+            });
+            
+            window.addEventListener('pointermove', function(e) {
+                if (!isMiniDragging) return;
+            
+                const dx = e.clientX - miniDragStartX;
+                const dy = e.clientY - miniDragStartY;
+                // 直接使用 transform 移动，避免重排
+                callMiniWindow.style.transform = `translate(${dx}px, ${dy}px)`;
+            
+                // 实时记录当前偏移（用于最终落位）
+                miniInitialTransform = { x: dx, y: dy };
+            });
+            
+            window.addEventListener('pointerup', function(e) {
+                if (!isMiniDragging) return;
+                isMiniDragging = false;
+                callMiniWindow.style.willChange = 'auto';
+                callMiniWindow.style.transition = 'box-shadow 0.2s ease';
+            
+                // 将 transform 的偏移转换为实际的 left / top
+                const finalLeft = miniStartLeft + miniInitialTransform.x;
+                const finalTop = miniStartTop + miniInitialTransform.y;
+            
+                // 边界约束（防止拖出视口）
+                const miniWidth = callMiniWindow.offsetWidth;
+                const miniHeight = callMiniWindow.offsetHeight;
+                const clampedLeft = Math.max(4, Math.min(finalLeft, window.innerWidth - miniWidth - 4));
+                const clampedTop = Math.max(40, Math.min(finalTop, window.innerHeight - miniHeight - 20));
+            
+                callMiniWindow.style.left = clampedLeft + 'px';
+                callMiniWindow.style.top = clampedTop + 'px';
+                callMiniWindow.style.transform = 'translate(0px, 0px)';
+            
+                callMiniWindow.releasePointerCapture(e.pointerId);
+            });
 
             document.addEventListener('keydown', function(e) { if (e.key === 'Escape') { if (callState.status === 'connected' && !
                         callState.isMinimized && !callOverlay.classList.contains('hidden')) { minimizeCall();
@@ -2580,8 +3032,15 @@
             audioFloatClose.onclick = () => audioManager.stop();
             musicTopBtn.onclick = () => { if (audioFloatBar.classList.contains('hidden')) { audioManager.showFloatBar(); } else {
                     audioManager.hideFloatBar(); } };
-            $('moments-btn').onclick = () => { if (momentsOverlay) { momentsOverlay.classList.remove('hidden');
-                    renderMoments(); } };
+            $('moments-btn').onclick = () => {
+                const dot = document.getElementById('moments-dot');
+                if (dot) dot.classList.add('hidden');
+                if (momentsOverlay) {
+                    momentsOverlay.classList.remove('hidden');
+                    renderMoments();
+                }
+            };
+            $('letter-btn').onclick = () => openLetterModal();
             $('close-moments').onclick = () => { if (momentsOverlay) momentsOverlay.classList.add('hidden'); };
             momentsOverlay.addEventListener('click', function(e) { if (e.target === momentsOverlay) { momentsOverlay.classList.add(
                     'hidden'); } });
@@ -2602,11 +3061,12 @@
             function openLetterModal() { if (letterModal) { letterModal.classList.remove('hidden');
                     renderLetters(); if ($('letter-text')) setTimeout(() => $('letter-text').focus(), 300); } }
 
-            function closeLetterModal() { if (letterModal) letterModal.classList.add('hidden'); }
-            $('letter-btn').onclick = () => openLetterModal();
+            function closeLetterModal() { 
+                if (letterModal) letterModal.classList.add('hidden'); 
+                if ($('letter-text')) $('letter-text').value = '';  // 增加此行
+            }
             $('close-letter-modal').onclick = () => closeLetterModal();
             letterModal.addEventListener('click', function(e) { if (e.target === letterModal) { closeLetterModal(); } });
-
             function resetSetPanelPosition() { setPanelCard.style.top = '50%';
                 setPanelCard.style.left = '50%';
                 setPanelCard.style.transform = 'translate(-50%,-50%)';
@@ -2669,37 +3129,35 @@
                     loPrev.style.backgroundImage = `url(${cfg.loA})`;
                 document.querySelectorAll('#set-panel-card [data-c]').forEach(b => { if (b.dataset.c === cfg.c) b.classList.add(
                         'active'); else b.classList.remove('active'); }); const themeColor = colorMap[cfg.c] || '#5B7FFF';
-                $('light').className = cfg.dark === 0 ?
-                    'px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-[var(--primary)] text-white shadow-md' :
-                    'px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600';
-                $('dark').className = cfg.dark === 1 ?
-                    'px-4 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 bg-[var(--primary)] text-white shadow-md' :
-                    'px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-200 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'; const
-                    smartResult = $('smart-import-result'); if (smartResult) smartResult.classList.add('hidden'); const
-                    replySpeedSlider = $('reply-speed-slider'); const replySpeedLabel = $('reply-speed-label'); if (
-                        replySpeedSlider) { replySpeedSlider.value = cfg.replySpeed || 4; if (replySpeedLabel) replySpeedLabel
-                        .textContent = (cfg.replySpeed || 4) + '秒'; } const replyCountSlider = $('reply-count-slider'); const
-                    replyCountLabel = $('reply-count-label'); if (replyCountSlider) { replyCountSlider.value = cfg.replyCount || 1; if (
-                        replyCountLabel) replyCountLabel.textContent = (cfg.replyCount || 1) + '条'; } const activeMsgToggle = $(
-                    'active-msg-toggle'); if (activeMsgToggle) activeMsgToggle.checked = !!cfg.activeMsg; const quoteReplyToggle =
-                    $('quote-reply-toggle'); if (quoteReplyToggle) quoteReplyToggle.checked = !!cfg.quoteReply; const
-                    readIgnoreToggle = $('read-ignore-toggle'); if (readIgnoreToggle) readIgnoreToggle.checked = !!cfg
-                    .readIgnore; const combineReplyToggle = $('combine-reply-toggle'); if (combineReplyToggle) combineReplyToggle
-                    .checked = !!cfg.combineReply; const fontSizeSlider = $('font-size-slider'); const fontSizeLabel = $(
-                    'font-size-label'); if (fontSizeSlider) { fontSizeSlider.value = cfg.fontSize || 14; if (fontSizeLabel)
-                    fontSizeLabel.textContent = (cfg.fontSize || 14) + 'px'; } const momentEnabledToggle = $(
-                    'moment-enabled-toggle'); if (momentEnabledToggle) momentEnabledToggle.checked = !!cfg.momentEnabled; const
-                    momentCountSlider = $('moment-count-slider'); const momentCountLabel = $('moment-count-label'); if (
-                        momentCountSlider) { momentCountSlider.value = cfg.momentDailyCount || 1; if (momentCountLabel)
-                        momentCountLabel.textContent = (cfg.momentDailyCount || 1) + '条'; } if ($('moment-start-hour')) $(
-                        'moment-start-hour').value = cfg.momentStartHour || 8; if ($('moment-start-min')) $('moment-start-min')
-                    .value = cfg.momentStartMin || 0; if ($('moment-end-hour')) $('moment-end-hour').value = cfg.momentEndHour ||
-                    23; if ($('moment-end-min')) $('moment-end-min').value = cfg.momentEndMin || 0; const momentReplyToggle = $(
-                    'moment-reply-toggle'); if (momentReplyToggle) momentReplyToggle.checked = !!cfg.momentReplyEnabled; const
-                    replyDelaySlider = $('reply-delay-slider'); const replyDelayLabel = $('reply-delay-label'); if (
-                        replyDelaySlider) { replyDelaySlider.value = cfg.momentReplyDelay || 60; if (replyDelayLabel)
-                        replyDelayLabel.textContent = (cfg.momentReplyDelay || 60) + '分钟'; } const mwBadge2 = $(
-                    'moment-words-count-badge'); if (mwBadge2) mwBadge2.innerText = `共 ${momentWords.length} 条`;
+                const lightBtn = $('light'),
+                    darkBtn = $('dark'); if (lightBtn && darkBtn) { if (cfg.dark === 0) { lightBtn.classList.add('active');
+                        darkBtn.classList.remove('active'); } else { darkBtn.classList.add('active');
+                        lightBtn.classList.remove('active'); } } const smartResult = $('smart-import-result'); if (smartResult)
+                    smartResult.classList.add('hidden'); const replySpeedSlider = $('reply-speed-slider'); const replySpeedLabel =
+                    $('reply-speed-label'); if (replySpeedSlider) { replySpeedSlider.value = cfg.replySpeed || 4; if (
+                        replySpeedLabel) replySpeedLabel.textContent = (cfg.replySpeed || 4) + '秒'; } const replyCountSlider = $(
+                    'reply-count-slider'); const replyCountLabel = $('reply-count-label'); if (replyCountSlider) {
+                    replyCountSlider.value = cfg.replyCount || 1; if (replyCountLabel) replyCountLabel.textContent = (cfg
+                        .replyCount || 1) + '条'; } const activeMsgToggle = $('active-msg-toggle'); if (activeMsgToggle)
+                    activeMsgToggle.checked = !!cfg.activeMsg; const quoteReplyToggle = $('quote-reply-toggle'); if (
+                        quoteReplyToggle) quoteReplyToggle.checked = !!cfg.quoteReply; const readIgnoreToggle = $(
+                    'read-ignore-toggle'); if (readIgnoreToggle) readIgnoreToggle.checked = !!cfg.readIgnore; const
+                    combineReplyToggle = $('combine-reply-toggle'); if (combineReplyToggle) combineReplyToggle.checked = !!cfg
+                    .combineReply; const fontSizeSlider = $('font-size-slider'); const fontSizeLabel = $('font-size-label'); if (
+                        fontSizeSlider) { fontSizeSlider.value = cfg.fontSize || 14; if (fontSizeLabel) fontSizeLabel.textContent =
+                        (cfg.fontSize || 14) + 'px'; } const momentEnabledToggle = $('moment-enabled-toggle'); if (
+                        momentEnabledToggle) momentEnabledToggle.checked = !!cfg.momentEnabled; const momentCountSlider = $(
+                    'moment-count-slider'); const momentCountLabel = $('moment-count-label'); if (momentCountSlider) {
+                    momentCountSlider.value = cfg.momentDailyCount || 1; if (momentCountLabel) momentCountLabel.textContent = (
+                        cfg.momentDailyCount || 1) + '条'; } if ($('moment-start-hour')) $('moment-start-hour').value = cfg
+                    .momentStartHour || 8; if ($('moment-start-min')) $('moment-start-min').value = cfg.momentStartMin || 0; if ($(
+                        'moment-end-hour')) $('moment-end-hour').value = cfg.momentEndHour || 23; if ($('moment-end-min')) $(
+                    'moment-end-min').value = cfg.momentEndMin || 0; const momentReplyToggle = $('moment-reply-toggle'); if (
+                        momentReplyToggle) momentReplyToggle.checked = !!cfg.momentReplyEnabled; const replyDelaySlider = $(
+                    'reply-delay-slider'); const replyDelayLabel = $('reply-delay-label'); if (replyDelaySlider) {
+                    replyDelaySlider.value = cfg.momentReplyDelay || 60; if (replyDelayLabel) replyDelayLabel.textContent = (cfg
+                        .momentReplyDelay || 60) + '分钟'; } const mwBadge2 = $('moment-words-count-badge'); if (mwBadge2) mwBadge2
+                    .innerText = `共 ${momentWords.length} 条`;
                 collapseAllCards(); }
 
             $('light').onclick = () => { cfg.dark = 0;
@@ -2942,24 +3400,195 @@
                     audioManager.hideFloatBar();
                     updateBadgeCounts();
                     showToast('已清空所有音频', '🗑'); } };
-            $('send-letter').onclick = () => { const c = $('letter-text').value.trim(); const ls = c.split('\n').filter(x => x
-                    .trim()); if (ls.length === 0) { alert('请至少写一句话哦~'); return; } const delay = 8 * 60 * 60 * 1000 + Math.floor(
-                    Math.random() * 4 * 60 * 60 * 1000); const pool = [...words, ...emojis].filter(x => x); const replyCount = Math
-                    .min(ls.length, 12); const shuffled = [...pool].sort(() => Math.random() - 0.5); const uniqueReply = [...new Set(
-                        shuffled)].slice(0, replyCount); const replyParagraph = uniqueReply.join('，') + '。';
-                letters.unshift({ content: ls, time: now(), rep: now() + delay, reply: replyParagraph });
+           
+            function composeNaturalParagraph(cards) {
+                if (!cards || cards.length === 0) return '';
+                if (cards.length === 1) return cards[0] + '。';
+                const resultParts = [];
+                const total = cards.length;
+                for (let i = 0; i < total; i++) {
+                    resultParts.push(cards[i]);
+                    if (i === total - 1) {
+                        // 最后一句：随机用句号或感叹号
+                        resultParts.push(Math.random() < 0.55 ? '。' : '~');
+                    } else if (i === total - 2) {
+                        // 倒数第二句：大概率用逗号，小概率用分号
+                        const r = Math.random();
+                        if (r < 0.5) resultParts.push('，');
+                        else if (r < 0.8) resultParts.push('；');
+                        else resultParts.push('，然后呢，');
+                    } else {
+                        // 中间句子：随机标点
+                        const r = Math.random();
+                        if (r < 0.45) resultParts.push('，');
+                        else if (r < 0.7) resultParts.push('；');
+                        else if (r < 0.85) resultParts.push('…');
+                        else resultParts.push('，');
+                    }
+                }
+                return resultParts.join('');
+            }
+
+
+            function migrateLettersToParagraphFormat() {
+                if (!letters || letters.length === 0) return;
+                let modified = false;
+            
+                for (let i = 0; i < letters.length; i++) {
+                    const letter = letters[i];
+                    if (letter.reply && Array.isArray(letter.reply)) {
+                        const cards = letter.reply.filter(item => item && typeof item === 'string' && item.trim());
+                        if (cards.length > 0) {
+                            // 使用与新版投信完全一致的组合函数
+                            const paragraph = composeNaturalParagraph(cards);
+                            letter.reply = paragraph;
+                            modified = true;
+                        } else {
+                            // 如果数组为空，给一个默认内容
+                            letter.reply = '❤️ Ta收到了你的信～';
+                            modified = true;
+                        }
+                    }
+                }
+            
+                if (modified) {
+                    SS('letters', letters);
+                    console.log('✅ 已迁移历史信件回信格式 -> 自然段落');
+                }
+            }
+            
+            $('send-letter').onclick = () => {
+                const c = $('letter-text').value.trim();
+                const ls = c.split('\n').filter(x => x.trim());
+                if (ls.length === 0) { showToast('请至少写一句话哦~', '✉️'); return; }
+            
+                const delay = 8 * 60 * 60 * 1000 + Math.floor(Math.random() * 4 * 60 * 60 * 1000);
+            
+                // 合并字卡与表情作为回复素材库
+                let pool = [...words, ...emojis].filter(x => x && x.trim());
+                if (pool.length === 0) {
+                    // 防止空库，给一个默认内容
+                    pool = ['❤️', '抱抱', '想你', '晚安', '好梦', '一起加油', '😊', '✨'];
+                }
+            
+                // 固定回复句数：8~15 句（随机整数）
+                const targetCount = Math.floor(Math.random() * (15 - 8 + 1) + 8);  // 8~15
+                let replyCards = [];
+            
+                // 从素材库中随机抽取 targetCount 条（允许重复，以保证数量）
+                for (let i = 0; i < targetCount; i++) {
+                    const randomIndex = Math.floor(Math.random() * pool.length);
+                    replyCards.push(pool[randomIndex]);
+                }
+            
+                // 用自然标点间隔组合成一段话
+                const replyParagraph = composeNaturalParagraph(replyCards);
+            
+                letters.unshift({
+                    content: ls,
+                    time: now(),
+                    rep: now() + delay,
+                    reply: replyParagraph
+                });
                 SS('letters', letters);
                 $('letter-text').value = '';
                 renderLetters();
-                alert('信件已投递！📮 请耐心等待8-12小时…'); };
+                showToast('信件已投递！📮 请耐心等待8-12小时…', '✉️');
+            };
             $('export').onclick = () => { const data = { cfg, words, emojis, momentWords, imgEmojis, audios, msgs, letters,
                         moments, count, scheduledMomentReplies, version: '3.9' }; const blob = new Blob([JSON.stringify(data)], {
                         type: 'application/json' }); const a = document.createElement('a');
                 a.href = URL.createObjectURL(blob);
-                a.download = '梦角数据_' + now() + '.json';
+                a.download = 'Ta数据_' + now() + '.json';
                 a.click();
                 showToast('数据已导出！包含朋友圈动态及回复计划', '📤'); };
             $('import-btn').onclick = () => $('import-file').click();
+            // 顶部栏导出按钮
+            const exportTopBtn = document.getElementById('export-top-btn');
+            if (exportTopBtn) {
+                exportTopBtn.onclick = () => {
+                    const data = {
+                        cfg, words, emojis, momentWords, imgEmojis, audios, msgs, letters,
+                        moments, count, scheduledMomentReplies, version: '3.9'
+                    };
+                    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = 'Ta数据_' + now() + '.json';
+                    a.click();
+                    showToast('对话数据已导出！', '📤');
+                };
+            }
+            
+            // 顶部栏导入按钮
+            const importTopBtn = document.getElementById('import-top-btn');
+            if (importTopBtn) {
+                importTopBtn.onclick = () => {
+                    // 创建一个隐藏的文件选择器，触发选择文件
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = '.json';
+                    input.onchange = function(e) {
+                        const file = e.target.files[0];
+                        if (!file) return;
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            try {
+                                const d = JSON.parse(reader.result);
+                                cfg = d.cfg || cfg;
+                                // 同步所有配置（与现有导入逻辑相同）
+                                Object.keys(defaultCfg).forEach(k => { if (!(k in cfg)) cfg[k] = defaultCfg[k]; });
+                                if (!cfg.myA || cfg.myA.startsWith('https://picsum.photos')) cfg.myA = DEFAULT_MY_AVATAR;
+                                if (!cfg.loA || cfg.loA.startsWith('https://picsum.photos')) cfg.loA = DEFAULT_LO_AVATAR;
+                                if (cfg.replySpeed === undefined || cfg.replySpeed < 3 || cfg.replySpeed > 120) cfg.replySpeed = 4;
+                                if (cfg.replyCount === undefined || cfg.replyCount < 1 || cfg.replyCount > 5) cfg.replyCount = 1;
+                                if (cfg.fontSize === undefined || cfg.fontSize < 12 || cfg.fontSize > 20) cfg.fontSize = 14;
+                                if (cfg.customBubbleCSS === undefined) cfg.customBubbleCSS = '';
+                                if (cfg.momentEnabled === undefined) cfg.momentEnabled = false;
+                                if (cfg.momentDailyCount === undefined || cfg.momentDailyCount < 0 || cfg.momentDailyCount > 5) cfg.momentDailyCount = 1;
+                                if (cfg.momentStartHour === undefined) cfg.momentStartHour = 8;
+                                if (cfg.momentStartMin === undefined) cfg.momentStartMin = 0;
+                                if (cfg.momentEndHour === undefined) cfg.momentEndHour = 23;
+                                if (cfg.momentEndMin === undefined) cfg.momentEndMin = 0;
+                                if (cfg.momentReplyEnabled === undefined) cfg.momentReplyEnabled = false;
+                                if (cfg.momentReplyDelay === undefined || cfg.momentReplyDelay < 10 || cfg.momentReplyDelay > 120) cfg.momentReplyDelay = 60;
+                                if (cfg.combineReply === undefined) cfg.combineReply = false;
+                                words = d.words || words;
+                                emojis = d.emojis || emojis;
+                                momentWords = d.momentWords || ["今天天气真好", "分享一首歌", "晚安世界", "好久不见", "最近怎么样"];
+                                imgEmojis = d.imgEmojis || [];
+                                audios = d.audios || [];
+                                msgs = d.msgs || msgs;
+                                letters = d.letters || letters;
+                                moments = d.moments || [];
+                                count = d.count || 0;
+                                quote = null; closeActionMenu(); cancelQuote();
+                                audioManager.stop();
+                                clearLoverMomentTimer();
+                                todayLoverMomentCount = 0;
+                                lastLoverMomentDate = '';
+                                hangupCall(); closeCallOverlay();
+                                if (pendingReplyData) { clearTimeout(pendingReplyData.timeoutId); if (pendingReplyData.tipElement && pendingReplyData.tipElement.parentNode) { pendingReplyData.tipElement.remove(); } pendingReplyData = null; }
+                                trimMessages(); trimMoments();
+                                SS('cfg', cfg); SS('words', words); SS('emojis', emojis); SS('momentWords', momentWords); SS('imgEmojis', imgEmojis); SS('audios', audios); SS('msgs', msgs); SS('letters', letters); SS('moments', moments); SS('count', count);
+                                applySettings();
+                                if (cfg.customBubbleCSS && cfg.customBubbleCSS.trim()) { applyCustomBubbleCSS(cfg.customBubbleCSS); } else { resetCustomBubbleCSS(); }
+                                renderAll();
+                                refreshSettingsForm();
+                                updateCallUI();
+                                if (cfg.activeMsg) scheduleActiveMsg(); else clearActiveMsgTimer();
+                                if (cfg.momentEnabled) scheduleNextLoverMoment(); else clearLoverMomentTimer();
+                                showToast('对话数据已导入！✨', '📥');
+                            } catch (err) {
+                                showToast('数据格式错误，无法导入', '⚠');
+                                console.error(err);
+                            }
+                        };
+                        reader.readAsText(file);
+                    };
+                    input.click();
+                };
+            }
             $('import-file').onchange = function(e) { const file = e.target.files[0]; if (!file) return; const reader = new
                 FileReader();
                 reader.onload = () => { try { const d = JSON.parse(reader.result);
@@ -3111,31 +3740,57 @@
                         'hidden')) { hangupCall(); } else if (callState.status === 'incoming' && !callOverlay.classList
                         .contains('hidden')) { hangupCall(); } } });
 
-            function init() { applySettings(); if (cfg.customBubbleCSS && cfg.customBubbleCSS.trim()) {
-                    getCustomBubbleStyleEl().textContent = cfg.customBubbleCSS; }
-                renderAll(); const myPrev = $('my-avt-preview'),
-                    loPrev = $('lo-avt-preview'); if (myPrev) myPrev.style.backgroundImage = `url(${cfg.myA})`; if (loPrev) loPrev
-                    .style.backgroundImage = `url(${cfg.loA})`;
+            function init() {
+                applySettings();
+                if (cfg.customBubbleCSS && cfg.customBubbleCSS.trim()) {
+                    getCustomBubbleStyleEl().textContent = cfg.customBubbleCSS;
+                }
+                renderAll();
+                migrateLettersToParagraphFormat();
+                const myPrev = $('my-avt-preview'),
+                    loPrev = $('lo-avt-preview');
+                if (myPrev) myPrev.style.backgroundImage = `url(${cfg.myA})`;
+                if (loPrev) loPrev.style.backgroundImage = `url(${cfg.loA})`;
                 toggleImgPanel(false);
                 scrollToBottom(false);
                 updateBadgeCounts();
-                audioManager.hideFloatBar(); if (audios.length === 0) musicTopBtn.classList.add('hidden'); else musicTopBtn
-                    .classList.remove('hidden'); if (cfg.activeMsg) scheduleActiveMsg();
-                trimMoments(); if (cfg.momentEnabled) scheduleNextLoverMoment();
-                scheduledMomentReplies = S('scheduledMomentReplies') || []; const nowTs = now(); const remaining = []; const
-                    tasksSnapshot = [...scheduledMomentReplies];
-                tasksSnapshot.forEach(task => { if (task.retried) return; if (task.replyTime <= nowTs) { try {
-                            executeScheduledReply(task.momentId); } catch (err) { console.warn('恢复朋友圈回复任务失败:', err); } } else { const
-                            timerId = setTimeout(() => { executeScheduledReply(task.momentId); }, task.replyTime - nowTs); if (
-                                !window._momentTimers) window._momentTimers = {};
+                audioManager.hideFloatBar();
+                if (audios.length === 0) musicTopBtn.classList.add('hidden');
+                else musicTopBtn.classList.remove('hidden');
+                if (cfg.activeMsg) scheduleActiveMsg();
+                trimMoments();
+                if (cfg.momentEnabled) scheduleNextLoverMoment();
+                catchUpLoverMoments();
+                scheduledMomentReplies = S('scheduledMomentReplies') || [];
+                const nowTs = now();
+                const remaining = [];
+                const tasksSnapshot = [...scheduledMomentReplies];
+                tasksSnapshot.forEach(task => {
+                    if (task.retried) return;
+                    if (task.replyTime <= nowTs) {
+                        try { executeScheduledReply(task.momentId); } catch (err) { console.warn('恢复朋友圈回复任务失败:', err); }
+                    } else {
+                        const timerId = setTimeout(() => { executeScheduledReply(task.momentId); }, task.replyTime - nowTs);
+                        if (!window._momentTimers) window._momentTimers = {};
                         window._momentTimers[task.momentId] = timerId;
-                        remaining.push(task); } });
+                        remaining.push(task);
+                    }
+                });
                 scheduledMomentReplies = remaining;
                 saveScheduledReplies();
                 callOverlay.classList.add('hidden');
                 callMiniWindow.classList.add('hidden');
-                updateCallUI(); }
+                updateCallUI();
+            
+                // ---------- 新增：初始化时检查日期并设置午夜重置 ----------
+                checkAndResetDailyCount();
+                scheduleMidnightReset();
+                // ---------- 新增结束 ----------
+            }
             init();
+            window.addEventListener('beforeunload', () => {
+                updateLastOnlineTime();
+            });
         })();
     </script>
 </body>
